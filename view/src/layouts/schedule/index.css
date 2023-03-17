@@ -1,0 +1,28 @@
+/*.schedule-input {
+    background: inherit;
+    color: white;
+    border-radius: 10px;
+    font-size: 16px;
+    border-color: white;
+}
+
+
+}
+.schedule-input:active {
+    border-color: aqua;
+}
+.schedule-input:visited {
+    border-color: aqua;
+}
+.schedule-input:link {
+    border-color: aqua;
+}*/
+
+.schedule-button {
+    background-color: rgb(13, 62, 129)!important;
+    padding: 10px 20px!important;
+}
+.schedule-button:hover {
+    background-color: white!important;
+    color: rgb(7, 12, 105)!important;
+}
