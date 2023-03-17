@@ -1,6 +1,8 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
 # dependencies
+/controller/__pycache__
+/model/__pycache__
 /view/node_modules
 .DS_Store
 

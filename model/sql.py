@@ -25,4 +25,21 @@ def getUserDataModel(userID):
     except KeyError:
         print(KeyError)
 
+def signUpModel(data):
+    pass
 
+def getUserListDataModel(userID):
+    pass
+
+def getDeviceScheduleModel():
+    pass
+
+def addDeviceScheduleModel(data):
+    #data = ["humidity", "17/03/2022", "07:00", "09:00"]
+    pass
+
+def deleteDeviceScheduleModel(deviceScheduleID):
+    pass
+
+def getUserAccessModel():
+    pass
