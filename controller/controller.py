@@ -97,9 +97,16 @@ def deleteDeviceScheduleController(deviceScheduleID):
     print(body['id']) #body['id'] = Là id của device schedule
     pass
 
-@app.route('/user-acess', methods=['GET']) 
+@app.route('/user-face-detect', methods=['GET']) 
 def getUserAccessController():
     token = request.headers.get('token')
     userID = encodeToken(token)
     #Trả về danh sách người dùng đã đi vào (xử lý ảnh AI)
     pass
+
+@app.route('/ai-system', methods=['POST'])
+def f():
+    body = request.get_json() 
+    #print(body['humidity'])#True or False
+    #print(body['temperature'])#True or False
+    #print(body['luminance'])#True or False
