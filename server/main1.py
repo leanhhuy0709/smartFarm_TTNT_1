@@ -6,7 +6,7 @@ from flask_cors import CORS
 import json
 import mysql.connector
 
-cnx = mysql.connector.connect(user='root', password='0397190274',
+cnx = mysql.connector.connect(user='root', password='hhd552002',
                             host='127.0.0.1',port = '3306',
                             database='smartfarmdb',auth_plugin='mysql_native_password')
 cursor = cnx.cursor()

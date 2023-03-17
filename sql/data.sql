@@ -1,11 +1,11 @@
-DROP  DATABASE `smartfarmdb`;
+DROP DATABASE IF EXISTS`smartfarmdb`;
 CREATE DATABASE IF NOT EXISTS `smartfarmdb` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 USE `smartfarmdb`;
 
 -- --------------------------------------------------------
 -- DROP TABLE `user`;
 CREATE TABLE `user` (
-	`userID` int PRIMARY KEY,
+	`userID` int PRIMARY KEY AUTO_INCREMENT,
     `phoneNumber` varchar(255),
     `email` varchar(255),
     `name` varchar(255),
@@ -15,10 +15,10 @@ CREATE TABLE `user` (
 );
 -- DROP TABLE `faceImage`;
 CREATE TABLE `faceImage` (
-	`code` varchar(255) PRIMARY KEY,
+	`code` int PRIMARY KEY AUTO_INCREMENT,
     `label` varchar(255),
     `linkref` varchar(1000),
-     `userID` int,
+    `userID` int,
 	FOREIGN KEY (`userID`) REFERENCES `user`(`userID`)
 );
 -- DROP TABLE `account`;
@@ -30,12 +30,12 @@ CREATE TABLE `account` (
 );
 -- DROP TABLE `employee`;
 CREATE TABLE `employee`(
-	`employeeID` int PRIMARY KEY,
+	`employeeID` int PRIMARY KEY AUTO_INCREMENT,
 	FOREIGN KEY (`employeeID`) REFERENCES `user`(`userID`)
 );
 -- DROP TABLE `yolobit`;
 CREATE TABLE `yolobit`(
-    `yolobitID` int PRIMARY KEY
+    `yolobitID` int PRIMARY KEY AUTO_INCREMENT
 );
 -- DROP TABLE `employeeManageYolobit`;
 CREATE TABLE `employeeManageYolobit`(
@@ -46,7 +46,7 @@ CREATE TABLE `employeeManageYolobit`(
 );
 -- DROP TABLE `sensor`;
 CREATE TABLE `sensor`(
-	`sensorID` int PRIMARY KEY,
+	`sensorID` int PRIMARY KEY AUTO_INCREMENT,
     `timestamp` datetime,
     `location` varchar(255),
     `type` varchar(255),
@@ -56,12 +56,12 @@ CREATE TABLE `sensor`(
 );
 -- DROP TABLE `device`;
 CREATE TABLE `device` (
-	`dID` int PRIMARY KEY,
+	`dID` int PRIMARY KEY AUTO_INCREMENT,
     `name` varchar(255)
 );
 -- DROP TABLE `deviceSchedule`;
 CREATE TABLE `deviceSchedule` (
-	`dSID` int PRIMARY KEY,
+	`dSID` int PRIMARY KEY AUTO_INCREMENT,
 	`startTime` time,
     `endTime` time,
     `dOfW` varchar(255),
@@ -70,7 +70,7 @@ CREATE TABLE `deviceSchedule` (
 );
 -- DROP TABLE `yolobitManageDeviceSchedule`;
 CREATE TABLE `yolobitManageDeviceSchedule` (
-	`dSID` int PRIMARY KEY,
+	`dSID` int PRIMARY KEY AUTO_INCREMENT,
     `yolobitID` int,
     FOREIGN KEY (`yolobitID`) REFERENCES `yolobit`(`yolobitID`),
     FOREIGN KEY (`dSID`) REFERENCES `deviceSchedule`(`dSID`)
