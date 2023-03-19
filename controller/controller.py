@@ -64,7 +64,9 @@ def signUpController():
     Tui đặt tên giống các biến trong mySQL luôn
     '''
     body = request.get_json()
+    print(body["data"])
     return signUpModel(body["data"])
+    
     
 
 @app.route('/userlist') 
@@ -72,6 +74,7 @@ def getUserListController():
     #Kiểm tra userID có phải người dùng hay không?
     token = request.headers.get('token')
     userID = encodeToken(token)
+    userIDList = getUserListDataModel()
     pass
 
 @app.route('/schedule') 
