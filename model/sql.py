@@ -8,10 +8,10 @@ cursor = cnx.cursor()
 
 def loginModel(username, password):
     try:
-        query = "SELECT userID FROM account where username=%s and password=%s"
+        query = "SELECT account.userID, position FROM account join user on account.userID = user.userID where username=%s and password=%s;"
         cursor.execute(query, (username, password))
         result = cursor.fetchall() #result = [[1]]
-        return result[0][0] 
+        return result[0]
     except KeyError:
         print(KeyError)
         
@@ -26,7 +26,8 @@ def getUserDataModel(userID):
         print(KeyError)
 
 def signUpModel(data):
-    pass
+    print("SignUpModel")
+    return "Hello"
 
 def getUserListDataModel(userID):
     pass

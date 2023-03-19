@@ -18,7 +18,7 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import CSS from './index.css';
 import Table from "examples/Tables/Table";
 import {Author, Function} from "layouts/tables/data/authorsTableData";
-import team2 from "assets/images/team-2.jpg";
+import team2 from "assets/images/water.png";
 import React from 'react';
 
 function MySelect(items)
@@ -52,15 +52,20 @@ function Schedule() {
   ];
   var columns = [
     { name: "device", align: "left"},
-    { name: "date", align: "center"},
-    { name: "time", align: "center"},
-    { name: "period", align: "center"}
+    { name: "day_of_week", align: "center"},
+    { name: "start_time", align: "center"},
+    { name: "end_time", align: "center"},
+    { name: "action", align: "center"}
   ];
+
+  
+
   var rows = [{
-    device: <Author image={team2} name="John Michael" email="john@gmail.com" />,
-    date: "17/03/2023",
-    time: "10:05",
-    period: "5 minutes"
+    device: <Author image={team2} name="Humidity Device"/>,
+    day_of_week: "Monday",
+    start_time: "10:05",
+    end_time: "10:30",
+    action: <Button className="schedule-button">Delete</Button>
   }];
   return (
     <DashboardLayout>

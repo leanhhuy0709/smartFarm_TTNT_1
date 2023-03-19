@@ -17,73 +17,85 @@ import Slider from "layouts/dashboard/components/Slider";
 
 import { getHumidityData, getTemperatureData, getLuminanceData } from "model/api/api";
 
-
-
 function Default() {
+
+  const [rawHData, setRawHData] = useState(null);
+  const [rawTData, setRawTData] = useState(null);
+  const [rawLData, setRawLData] = useState(null);
+
   const [hData, setHData] = useState(null);
   const [tData, setTData] = useState(null);
   const [lData, setLData] = useState(null);
+  
   var today = new Date();
+
+  const convertToChartData = (name, data, day) =>
+  {
+    data = data.filter((e)=>e.created_at.substring(8, 10) == day)
+    let resLabel = data.map((e, idx)=>idx);
+    let resValue = data.map((e)=>e.value);
+    return {
+      labels: resLabel,
+      datasets: [
+        {
+          label: name,
+          color: "info",
+          data: resValue,
+        },
+      ],
+    }
+  }
 
   useEffect(()=>{
     getHumidityData()
     .then((res)=>{
-      console.log(res);
-      let resLabel = res.map((e)=>e[1].substring(0, 2));
-      let resValue = res.map((e)=>e[0]);
-      setHData({
-        labels: resLabel,
-        datasets: [
-          {
-            label: "Humidity",
-            color: "info",
-            data: resValue,
-          },
-        ],
-      });
+      setRawHData(res);
+      setHData(convertToChartData("Humidity", res, today.getDate()));
     })
     .catch((err)=>{
       console.log(err);
     });
     getTemperatureData()
     .then((res)=>{
-      console.log(res);
-      let resLabel = res.map((e)=>e[1].substring(0, 2));
-      let resValue = res.map((e)=>e[0]);
-      setTData({
-        labels: resLabel,
-        datasets: [
-          {
-            label: "Temperature",
-            color: "info",
-            data: resValue,
-          },
-        ],
-      });
+      setRawTData(res);
+      setTData(convertToChartData("Temperature", res, today.getDate()));
     })
     .catch((err)=>{
       console.log(err);
     });
     getLuminanceData()
     .then((res)=>{
-      console.log(res);
-      let resLabel = res.map((e)=>e[1].substring(0, 2));
-      let resValue = res.map((e)=>e[0]);
-      setLData({
-        labels: resLabel,
-        datasets: [
-          {
-            label: "Luminance",
-            color: "info",
-            data: resValue,
-          },
-        ],
-      });
+      setRawLData(res)
+      setLData(convertToChartData("Luminance", res, today.getDate()));
     })
     .catch((err)=>{
       console.log(err);
     });
   }, []);
+
+  function handleDayChange()
+  {
+    let selectedDay = document.getElementById("select-day").value;
+
+    setHData(convertToChartData("Humidity", rawHData, selectedDay));
+    setTData(convertToChartData("Temperature", rawTData, selectedDay));
+    setLData(convertToChartData("Luminance", rawLData, selectedDay));
+  }
+
+  function SelectDate()
+  {
+    return (
+      <select id = "select-day" style={{fontSize: "18px", padding: "5px"}} onChange = {handleDayChange}>
+        <option value = {today.getDate()}>{today.getDate()}</option>
+        <option value = {today.getDate() - 1}>{today.getDate() - 1}</option>
+        <option value = {today.getDate() - 2}>{today.getDate() - 2}</option>
+        <option value = {today.getDate() - 3}>{today.getDate() - 3}</option>
+        
+      </select>
+    );
+
+
+  }
 
   if (tData != null && hData != null && lData != null)
   return (
@@ -110,15 +122,16 @@ function Default() {
           <Grid item xs={12} md={6} lg={3}>
             <DetailedStatisticsCard
               title="Recent luminance"
-              count={lData.datasets[0].data.length > 0 ?`${lData.datasets[0].data[lData.datasets[0].data.length - 1]} nits`: ''}
+              count={lData.datasets[0].data.length > 0 ?`${lData.datasets[0].data[lData.datasets[0].data.length - 1]} nm`: ''}
               icon={{ color: "success", component: <i className="fa fa-lightbulb-o" /> }}
-              percentage={{ color: `${lData.datasets[0].data[lData.datasets[0].data.length - 1] - lData.datasets[0].data[lData.datasets[0].data.length - 2] > 0 ? "success":"error"}`, count:`${lData.datasets[0].data[lData.datasets[0].data.length - 1] - lData.datasets[0].data[lData.datasets[0].data.length - 2] > 0 ? '+':''}${lData.datasets[0].data[lData.datasets[0].data.length - 1] - lData.datasets[0].data[lData.datasets[0].data.length - 2]} nits`, text: "since one hour" }}
+              percentage={{ color: `${lData.datasets[0].data[lData.datasets[0].data.length - 1] - lData.datasets[0].data[lData.datasets[0].data.length - 2] > 0 ? "success":"error"}`, count:`${lData.datasets[0].data[lData.datasets[0].data.length - 1] - lData.datasets[0].data[lData.datasets[0].data.length - 2] > 0 ? '+':''}${lData.datasets[0].data[lData.datasets[0].data.length - 1] - lData.datasets[0].data[lData.datasets[0].data.length - 2]} nm`, text: "since one hour" }}
             />
           </Grid>
           <Grid item xs={12} md={6} lg={3}>
             <DetailedStatisticsCard
               title="Today"
-              count={String(today.getDate()).padStart(2, '0')}
+              count={SelectDate()
+              /*String(today.getDate()).padStart(2, '0') */}
               icon={{ color: "success", component: <i className="fa fa-calendar" /> }}
               percentage={{color: "success",count: String(today.getMonth() + 1).padStart(2, '0') + "/" + today.getFullYear() }}
             />

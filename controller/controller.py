@@ -33,8 +33,7 @@ def loginController():
     body = request.get_json()
     username = body['username']
     password = body['password']
-    userID = loginModel(username, password)
-    print(userID)
+    [userID, position] = loginModel(username, password)
     # Tạo payload của token, bao gồm userID
     payload = {"userID": userID}
 
@@ -44,8 +43,8 @@ def loginController():
 
     # Gán token vào biến temp
     temp = token
-    
-    return jsonify({"token": temp})
+    isAdmin = (position == "Admin")
+    return jsonify({"token": temp, "isAdmin": isAdmin})
 
 @app.route('/user')
 def getUserDataController():
@@ -65,9 +64,8 @@ def signUpController():
     Tui đặt tên giống các biến trong mySQL luôn
     '''
     body = request.get_json()
-    print(body)
+    return signUpModel(body["data"])
     
-    signUpModel()
 
 @app.route('/userlist') 
 def getUserListController():
