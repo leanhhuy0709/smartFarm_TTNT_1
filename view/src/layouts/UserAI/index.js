@@ -14,7 +14,7 @@ import Table from "examples/Tables/Table";
 // Data
 import {Author, Function} from "layouts/tables/data/authorsTableData";
 import { useEffect, useState } from "react";
-import { getUsersData } from "model/api/api";
+import { getUserListData } from "model/api/api";
 
 import team2 from "assets/images/team-2.jpg";
 import team3 from "assets/images/team-3.jpg";
@@ -33,7 +33,7 @@ function Tables() {
   const [rows, setRows] = useState(null);
   
   useEffect(()=>{
-    getUsersData()
+    getUserListData()
     .then((res)=>{
       console.log(res[0]);
       setRows(res.map((idx)=> {

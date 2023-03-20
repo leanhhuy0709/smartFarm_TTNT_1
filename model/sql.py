@@ -32,7 +32,7 @@ def signUpModel(data):
     try:
         query = """INSERT INTO user (name, email, phoneNumber, location, dob, position)
         values(%s, %s, %s, %s, %s, %s);"""
-        cursor.execute(query, (data['name'], data['email'], data['phone'], data['location'], data['dob'], data['position']))
+        cursor.execute(query, (data['name'], data['email'], data['phone'], data['location'], data['dob'], "Staff"))
     except KeyError:
         print(KeyError)
     
@@ -68,3 +68,12 @@ def deleteDeviceScheduleModel(deviceScheduleID):
 
 def getUserAccessModel():
     pass
+
+def getDeviceListModel():
+    try:
+        query = "select * from device"
+        cursor.execute(query)
+        result = cursor.fetchall()
+        return list(map(lambda x: {"dID": x[0], "name": x[1]}, result))
+    except KeyError:
+        print(KeyError)

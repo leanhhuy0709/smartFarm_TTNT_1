@@ -115,7 +115,11 @@ export default function App() {
             color={sidenavColor}
             brand={darkSidenav || darkMode ? brand : brandDark} 
             brandName="Yolo Farm"
-            routes={routes}
+            routes={routes.filter((r)=>{
+              if(localStorage.getItem("isAdmin") == "true") return true;
+              if (r.name == "User List" ||r.name == "User access list") return false;
+              else  return true;
+            })}
             onMouseEnter={handleOnMouseEnter}
             onMouseLeave={handleOnMouseLeave}
           /> {/*Theme 
@@ -125,8 +129,8 @@ export default function App() {
       )}
       <Routes>
         {getRoutes(routes.filter((r)=>{
-          if(localStorage.getItem("isAdmin")) return true;
-          if (r.name == "User List" || r.name == "Schedule" ||r.name == "User access list") return false;
+          if(localStorage.getItem("isAdmin") == "true") return true;
+          if (r.name == "User List"||r.name == "User access list") return false;
           else  return true;
         }))}
         <Route path="*" element={localStorage.getItem("usr")?<Navigate to="/dashboard" />:<Navigate to="/authentication/sign-in" />} />
