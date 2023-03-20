@@ -19,7 +19,9 @@ import CSS from './index.css';
 import Table from "examples/Tables/Table";
 import {Author, Function} from "layouts/tables/data/authorsTableData";
 import team2 from "assets/images/water.png";
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import { getScheduleData } from "model/api/api";
+
 
 function MySelect(items)
 {
@@ -58,15 +60,37 @@ function Schedule() {
     { name: "action", align: "center"}
   ];
 
-  
+  const [rows, setRows] = useState(null) 
+  useEffect(()=>{
+    /*
+    getScheduleData()
+    .then((res)=>{
+      console.log(res)
+    })
+    .catch((err)=>console.log(err))
+    */
+    let res = [{"dID": 4000, "dOW": "Monday", "startTime": "15:00", "endTime": "16:00", "name": "Water Pump"},
+    {"dID": 4001, "dOW": "Tuesday", "startTime": "13:00", "endTime": "14:00", "name": "Water Pump"},
+    {"dID": 4002, "dOW": "Monday", "startTime": "12:00", "endTime": "13:00", "name": "Light"}
+  ];
+    setRows(res.map((e)=> {
+      return {
+        device: <Author image={""} name={e.name}/>,
+        day_of_week: e.dOW,
+        start_time: e.startTime,
+        end_time: e.endTime,
+        action: <Button className="schedule-button">Delete</Button>
+      };
+    }))
+  }, []);
 
-  var rows = [{
-    device: <Author image={team2} name="Humidity Device"/>,
-    day_of_week: "Monday",
-    start_time: "10:05",
-    end_time: "10:30",
-    action: <Button className="schedule-button">Delete</Button>
-  }];
+
+  function handleAddSchedule()
+  {
+    
+  }
+
+  if (rows)
   return (
     <DashboardLayout>
       <DashboardNavbar />

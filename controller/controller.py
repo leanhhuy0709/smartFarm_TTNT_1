@@ -64,7 +64,7 @@ def signUpController():
     Tui đặt tên giống các biến trong mySQL luôn
     '''
     body = request.get_json()
-    print(body["data"])
+    #print(body["data"])
     return signUpModel(body["data"])
     
     
@@ -111,3 +111,10 @@ def f():
     #print(body['humidity'])#True or False
     #print(body['temperature'])#True or False
     #print(body['luminance'])#True or False
+
+@app.route('/devicelist', methods=['GET'])
+def getDeviceListController():
+    token = request.headers.get('token')
+    userID = encodeToken(token)
+    return getDeviceListModel()
+    

@@ -11,7 +11,7 @@ import UserAI from "layouts/UserAI";
 // Argon Dashboard 2 MUI components
 import ArgonBox from "components/ArgonBox";
 
-const routes = [
+var routes = [
   {
     type: "route",
     name: "Dashboard",
