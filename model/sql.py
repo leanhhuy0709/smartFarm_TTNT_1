@@ -26,7 +26,10 @@ def getUserDataModel(userID):
         print(KeyError)
 
 def signUpModel(data):
-    pass
+    try:
+        query = "SELECT * FROM user WHERE "
+    except KeyError:
+        print(KeyError)
 
 def getUserListDataModel(userID):
     pass
