@@ -61,7 +61,6 @@ function CoverLayout({ title, description, image, imgPosition, button, children 
           </Grid>
         </Grid>
       </ArgonBox>
-      <Footer />
     </PageLayout>
   );
 }

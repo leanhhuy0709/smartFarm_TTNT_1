@@ -124,7 +124,11 @@ export default function App() {
         </>
       )}
       <Routes>
-        {getRoutes(routes)}
+        {getRoutes(routes.filter((r)=>{
+          if(localStorage.getItem("isAdmin")) return true;
+          if (r.name == "User List" || r.name == "Schedule" ||r.name == "User access list") return false;
+          else  return true;
+        }))}
         <Route path="*" element={localStorage.getItem("usr")?<Navigate to="/dashboard" />:<Navigate to="/authentication/sign-in" />} />
       </Routes>
     </ThemeProvider>

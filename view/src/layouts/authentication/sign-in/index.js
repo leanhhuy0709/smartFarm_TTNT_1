@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Argon Dashboard 2 MUI - v3.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-material-ui
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 import { useState } from "react";
 
 // react-router-dom components
@@ -46,14 +31,9 @@ function Illustration() {
     var psw = document.getElementById("psw").value;
     postSignIn(usr, psw)
     .then((res)=>{
-      console.log(res);
-      if (res["userID"] != -1)
-      {
-        localStorage.setItem("userID", res["userID"]);
-        window.location.pathname = "dashboard";
-      }
-      else 
-        alert("Tên đăng nhập hoặc mật khẩu sai!");
+      localStorage.setItem("token", res["token"]);
+      localStorage.setItem("isAdmin", res["isAdmin"]);
+      window.location.pathname = "dashboard";
     })
     .catch((err)=>console.log(err))
   }
