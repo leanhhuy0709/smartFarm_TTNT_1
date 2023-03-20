@@ -21,13 +21,14 @@ import {Author, Function} from "layouts/tables/data/authorsTableData";
 import team2 from "assets/images/water.png";
 import React, {useState, useEffect} from 'react';
 import { getScheduleData } from "model/api/api";
+import { getDeviceListData } from "model/api/api";
 
 
 function MySelect(items)
 {
   return (
       <select className="schedule-input" style={{padding: "10px", width: items.width}}>
-              {items.option.map((idx)=>(<option key = {idx.value} value={idx.value}>{idx.label}</option>))}
+              {items.option.map((idx)=>(<option key = {idx.dID} value={idx.dID}>{idx.name}</option>))}
         </select>
   );
 }
@@ -61,7 +62,14 @@ function Schedule() {
   ];
 
   const [rows, setRows] = useState(null) 
+  const [devices, setDevices] = useState(null)
   useEffect(()=>{
+    getDeviceListData()
+    .then((res)=>{
+      console.log(res);
+      setDevices(res);
+    })
+    .catch((err)=>console.log(err));
     /*
     getScheduleData()
     .then((res)=>{
@@ -87,10 +95,10 @@ function Schedule() {
 
   function handleAddSchedule()
   {
-    
+
   }
 
-  if (rows)
+  if (rows && devices)
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -107,7 +115,7 @@ function Schedule() {
                     <ArgonTypography style={{fontSize: "16px", padding: "10px"}}><b>Job</b></ArgonTypography>
                   </Grid>
                   <Grid item xs={10} style={{background: "inherit"}}>
-                  <MySelect option={jobOption} width="calc(100% - 30px)"/>
+                  <MySelect option={devices} width="calc(100% - 30px)"/>
                 </Grid>
 
                 <Grid item xs={2} style={{background: "inherit"}}>
