@@ -25,7 +25,7 @@ CREATE TABLE `faceImage` (
 CREATE TABLE `account` (
 	`username` varchar(255) PRIMARY KEY,
     `password` varchar(255),
-    `userID` int,
+    `userID` int AUTO_INCREMENT,
     FOREIGN KEY (`userID`) REFERENCES `user`(`userID`)
 );
 -- DROP TABLE `employee`;
@@ -33,15 +33,21 @@ CREATE TABLE `employee`(
 	`employeeID` int PRIMARY KEY AUTO_INCREMENT,
 	FOREIGN KEY (`employeeID`) REFERENCES `user`(`userID`)
 );
+
+CREATE TABLE `admin`(
+	`adminID` int PRIMARY KEY AUTO_INCREMENT,
+	FOREIGN KEY (`adminID`) REFERENCES `user`(`userID`)
+);
+
 -- DROP TABLE `yolobit`;
 CREATE TABLE `yolobit`(
     `yolobitID` int PRIMARY KEY AUTO_INCREMENT
 );
--- DROP TABLE `employeeManageYolobit`;
-CREATE TABLE `employeeManageYolobit`(
-	`employeeID` int PRIMARY KEY,
+-- DROP TABLE `adminManageYolobit`;
+CREATE TABLE `adminManageYolobit`(
+	`adminID` int PRIMARY KEY,
     `yolobitID` int,
-    FOREIGN KEY (`employeeID`) REFERENCES `employee`(`employeeID`),
+    FOREIGN KEY (`adminID`) REFERENCES `admin`(`adminID`),
     FOREIGN KEY (`yolobitID`) REFERENCES `yolobit`(`yolobitID`)
 );
 -- DROP TABLE `sensor`;
@@ -77,27 +83,30 @@ CREATE TABLE `yolobitManageDeviceSchedule` (
 );
 
 
-
-
 -- insert data
-INSERT INTO user VALUES (1, "0123456789", "huy.leanh0709@hcmut.edu.vn", "Le Anh Huy", "Staff", "Viet Nam", "2002-09-07");
+INSERT INTO user VALUES (1, "0123456789", "huy.leanh0709@hcmut.edu.vn", "Le Anh Huy", "Admin", "Viet Nam", "2002-09-07");
 INSERT INTO account VALUES ("huyleanh", "012345", 1);
+INSERT INTO faceImage VALUES (1000, "Huy Image 1", "https://scontent.fsgn10-2.fna.fbcdn.net/v/t39.30808-6/336268601_742518720862683_8492416973459754325_n.jpg?stp=cp6_dst-jpg&_nc_cat=104&ccb=1-7&_nc_sid=dbeb18&_nc_ohc=dprinoks7LkAX_Hr33K&_nc_ht=scontent.fsgn10-2.fna&oh=00_AfCgRfgdpAojSYNL8tg98ctdJcHmtwNM1QZJqNMt8eGI8Q&oe=641C7433", 1);
+INSERT INTO admin VALUES(1);
 
-INSERT INTO user VALUES (2, "0123456789", "duy.leanh0709@hcmut.edu.vn", "Le Anh Duy", "Staff", "Viet Nam", "2002-07-07");
-INSERT INTO account VALUES ("duyleanh", "012345", 2);
+INSERT INTO user VALUES (2, "0123456789", "hoang.dohuy@hcmut.edu.vn", "Do Huy Hoang", "Staff", "Viet Nam", "2002-09-09");
+INSERT INTO account VALUES ("hoangdohuy", "012345", 2);
+INSERT INTO employee VALUES(2);
 
-INSERT INTO faceImage VALUES (1000, "Huy 1", "https://scontent.fsgn8-4.fna.fbcdn.net/v/t39.30808-6/324263099_1152026902123884_3215507633833538992_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=k8TpX77Y9R0AX8oXcBr&_nc_ht=scontent.fsgn8-4.fna&oh=00_AfAzdQtXhJIJEOWqY70_tiTKzuddYd0GyLcazMQYKI6H8w&oe=64199DC5", 1);
-INSERT INTO faceImage VALUES (1001, "Huy 2", "https://scontent.fsgn8-4.fna.fbcdn.net/v/t39.30808-6/307207746_390759193222371_4108161209628341013_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=174925&_nc_ohc=VsI_Ya9eetUAX8G_0PU&_nc_ht=scontent.fsgn8-4.fna&oh=00_AfA07IsopYETc0ZnVzDuqzpsEFzUVM2B4KTVxoQEHl5vvw&oe=64193F74", 1);
-INSERT INTO employee VALUES(1);
+
+
+
 
 INSERT INTO yolobit VALUES (2000);
-INSERT INTO employeeManageYolobit VALUES(1, 2000);
+INSERT INTO adminManageYolobit VALUES(1, 2000);
 
 INSERT INTO sensor VALUES (3000, "2023-03-17 15:16:59", "Viet Nam", "Humidity", 40, 2000);
-INSERT INTO device VALUES (4000, "Humidity device");
+INSERT INTO device(name) VALUES ("Water pump");
+INSERT INTO device(name) VALUES ("Tarpaulin");
+INSERT INTO device(name) VALUES ("Light");
+
 INSERT INTO deviceSchedule VALUES (5000, "15:00:00", "16:00:00", "Monday", 4000);
 INSERT INTO yolobitManageDeviceSchedule VALUES(5000, 2000);
-
 
 
 -- view data
@@ -107,5 +116,6 @@ INSERT INTO yolobitManageDeviceSchedule VALUES(5000, 2000);
 -- select * from faceImage;
 -- select * from sensor;
 SELECT * FROM (account join user on account.userID = user.userID) left join faceImage on user.userID = faceImage.userID;
+-- SELECT account.userID, position FROM account join user on account.userID = user.userID where username='huyleanh' and password='012345';
 
-
+select * from device;

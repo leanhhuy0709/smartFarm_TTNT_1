@@ -9,6 +9,7 @@ const apiSignUp = '/signup';
 const apiUser = '/user';
 const apiUserList = '/users';
 const apiScheduleInfo = '/schedule';
+const apiDeviceList = '/devicelist';
 
 const key = "aio_dvKF40U3ysleCxts2HrhN0JtAcXF";
 
@@ -63,6 +64,16 @@ export const getUserListData = async () =>
 export const getScheduleData = async () =>
 {
     const result = await axios.get(host + apiScheduleInfo,{
+        headers: {
+          'token': localStorage.getItem("token")
+        }
+      });
+    return result.data;
+}
+
+export const getDeviceListData = async () =>
+{
+    const result = await axios.get(host + apiDeviceList,{
         headers: {
           'token': localStorage.getItem("token")
         }
