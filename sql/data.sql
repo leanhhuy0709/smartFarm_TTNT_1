@@ -101,7 +101,7 @@ INSERT INTO yolobit VALUES (2000);
 INSERT INTO adminManageYolobit VALUES(1, 2000);
 
 INSERT INTO sensor VALUES (3000, "2023-03-17 15:16:59", "Viet Nam", "Humidity", 40, 2000);
-INSERT INTO device(name) VALUES ("Water pump");
+INSERT INTO device(dID, name) VALUES (4000, "Water pump");
 INSERT INTO device(name) VALUES ("Tarpaulin");
 INSERT INTO device(name) VALUES ("Light");
 
