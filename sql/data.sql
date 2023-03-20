@@ -112,6 +112,11 @@ INSERT INTO deviceSchedule(dSID, startTime, endTime, dOfW, dID) VALUES (5000, "1
 -- select * from sensor;
 SELECT * FROM (account join user on account.userID = user.userID) left join faceImage on user.userID = faceImage.userID;
 -- SELECT account.userID, position FROM account join user on account.userID = user.userID where username='huyleanh' and password='012345';
+<<<<<<< HEAD
 select * from user;
 -- SELECT * FROM deviceSchedule join device on deviceSchedule.dID = device.dID;
 SELECT user.userID, email, name, position, location, DOB, linkref, phoneNumber FROM (account join user on account.userID = user.userID) left join faceImage on user.userID = faceImage.userID
+=======
+
+select * from device;
+>>>>>>> f877e064440e6e53190897c49f21824c8b195a5b

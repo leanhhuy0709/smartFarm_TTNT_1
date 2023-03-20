@@ -31,11 +31,21 @@ def getUserDataModel(userID):
 def signUpModel(data):
     # {'name': 'hoang', 'email': 'hoang@gmail.com', 'phone': '0987654321', 'location': 'hcm', 'dob': '2000-01-01', 'image': 'a', 'username': 'hoang', 'password': '1234'}
     
+    # check if username exist
+    try:
+        query = """SELECT EXISTS(SELECT * FROM account WHERE username = \"""" + str(data['username']) + """\")"""
+        cursor.execute(query)
+        result = cursor.fetchall()
+    except result == 1:
+        return """This username has been used. Pls choose another username"""
+
+
     # add to user table
     try:
         query = """INSERT INTO user (name, email, phoneNumber, location, dob, position)
         values(%s, %s, %s, %s, %s, %s);"""
         cursor.execute(query, (data['name'], data['email'], data['phone'], data['location'], data['dob'], "Staff"))
+        result = cursor.fetchall()
     except KeyError:
         print(KeyError)
     
@@ -44,16 +54,19 @@ def signUpModel(data):
         query = """INSERT INTO faceImage (label, linkref, userID)
         values(%s, %s, (SELECT MAX(userID) from user));"""
         cursor.execute(query, (data['name'], data['image']))
+        result = cursor.fetchall()
     except KeyError:
         print(KeyError)
-    
+
     # add to account table
     try:
         query = """INSERT INTO account (username, password, userID)
         values(%s, %s, (SELECT MAX(userID) from user));"""
         cursor.execute(query, (data['username'], data['password']))
+        result = cursor.fetchall()
     except KeyError:
         print(KeyError)
+    
     return "Sign up success"
 
 def getUserListDataModel():
