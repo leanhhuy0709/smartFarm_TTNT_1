@@ -7,9 +7,11 @@ const apiLuminance = 'https://io.adafruit.com/api/v2/leanhhuy/feeds/luminance/da
 const apiSignIn = '/login';
 const apiSignUp = '/signup';
 const apiUser = '/user';
-const apiUserList = '/users';
+const apiUserList = '/userlist';
 const apiScheduleInfo = '/schedule';
 const apiDeviceList = '/devicelist';
+const apiAddSchedule = '/add-schedule';
+const apiDelSchedule = '/del-schedule';
 
 const key = "aio_dvKF40U3ysleCxts2HrhN0JtAcXF";
 
@@ -80,3 +82,24 @@ export const getDeviceListData = async () =>
       });
     return result.data;
 }
+
+export const putAddSchedule = async (data) =>
+{
+    const result = await axios.put(host + apiAddSchedule, {
+        headers: {
+            'token': localStorage.getItem("token")
+          },
+        data});
+    return result.data;
+}
+
+export const putDelSchedule = async (data) =>
+{
+    const result = await axios.put(host + apiDelSchedule, {
+        headers: {
+            'token': localStorage.getItem("token")
+          },
+        data});
+    return result.data;
+}
+

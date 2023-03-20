@@ -51,10 +51,7 @@ def getUserDataController():
     token = request.headers.get('token')
     userID = encodeToken(token)
     result = getUserDataModel(userID)
-    return  jsonify({"userID": result[0][2], "name": result[0][6],
-                    "phone": result[0][4], "email": result[0][5],
-                    "position": result[0][7], "location": result[0][8],
-                    "dob": result[0][9], "image": result[0][12]})
+    return  jsonify(result)
    
 @app.route('/signup', methods=['POST']) 
 def signUpController():
@@ -74,28 +71,30 @@ def getUserListController():
     #Kiểm tra userID có phải người dùng hay không?
     token = request.headers.get('token')
     userID = encodeToken(token)
-    userIDList = getUserListDataModel()
-    pass
+    return jsonify(getUserListDataModel())
 
 @app.route('/schedule') 
 def getDeviceScheduleController():
     token = request.headers.get('token')
     userID = encodeToken(token)
-    pass
+    return jsonify(getDeviceScheduleModel())
 
 @app.route('/add-schedule', methods=['PUT']) 
-def addDeviceScheduleController(data):
+def addDeviceScheduleController():
     #data = ["humidity", "17/03/2022", "07:00", "09:00"]
     token = request.headers.get('token')
     userID = encodeToken(token)
-    pass
+    body = request.get_json()
+    return addDeviceScheduleModel(body["data"])
 
 @app.route('/del-schedule', methods=['PUT']) 
-def deleteDeviceScheduleController(deviceScheduleID):
+def deleteDeviceScheduleController():
     token = request.headers.get('token')
     userID = encodeToken(token)
-    body = request.get_json() 
-    print(body['id']) #body['id'] = Là id của device schedule
+    body = request.get_json()
+    
+    
+    return deleteDeviceScheduleModel(body['data'])
     pass
 
 @app.route('/user-face-detect', methods=['GET']) 

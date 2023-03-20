@@ -74,13 +74,8 @@ CREATE TABLE `deviceSchedule` (
     `dID` int,
     FOREIGN KEY (`dID`) REFERENCES `device`(`dID`)
 );
--- DROP TABLE `yolobitManageDeviceSchedule`;
-CREATE TABLE `yolobitManageDeviceSchedule` (
-	`dSID` int PRIMARY KEY AUTO_INCREMENT,
-    `yolobitID` int,
-    FOREIGN KEY (`yolobitID`) REFERENCES `yolobit`(`yolobitID`),
-    FOREIGN KEY (`dSID`) REFERENCES `deviceSchedule`(`dSID`)
-);
+
+
 
 
 -- insert data
@@ -101,12 +96,12 @@ INSERT INTO yolobit VALUES (2000);
 INSERT INTO adminManageYolobit VALUES(1, 2000);
 
 INSERT INTO sensor VALUES (3000, "2023-03-17 15:16:59", "Viet Nam", "Humidity", 40, 2000);
-INSERT INTO device(name) VALUES ("Water pump");
+INSERT INTO device(dID, name) VALUES (4000, "Water pump");
 INSERT INTO device(name) VALUES ("Tarpaulin");
 INSERT INTO device(name) VALUES ("Light");
 
-INSERT INTO deviceSchedule VALUES (5000, "15:00:00", "16:00:00", "Monday", 4000);
-INSERT INTO yolobitManageDeviceSchedule VALUES(5000, 2000);
+INSERT INTO deviceSchedule(dSID, startTime, endTime, dOfW, dID) VALUES (5000, "15:00:00", "16:00:00", "Monday", 4000);
+
 
 
 -- view data
@@ -117,5 +112,6 @@ INSERT INTO yolobitManageDeviceSchedule VALUES(5000, 2000);
 -- select * from sensor;
 SELECT * FROM (account join user on account.userID = user.userID) left join faceImage on user.userID = faceImage.userID;
 -- SELECT account.userID, position FROM account join user on account.userID = user.userID where username='huyleanh' and password='012345';
-
-select * from device;
+select * from user;
+-- SELECT * FROM deviceSchedule join device on deviceSchedule.dID = device.dID;
+SELECT user.userID, email, name, position, location, DOB, linkref, phoneNumber FROM (account join user on account.userID = user.userID) left join faceImage on user.userID = faceImage.userID

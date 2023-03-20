@@ -25,31 +25,33 @@ import team4 from "assets/images/team-4.jpg";
 function Tables() {
   //const { columns, rows } = authorsTableData;
   var columns = [
-    { name: "user", align: "left", key2: "user" },
-    { name: "function", align: "left", key2: "function" },
-    { name: "status", align: "center", key2: "status"},
-    { name: "employed", align: "center", key2: "employed" },
-    { name: "action", align: "center", key2: "action" },
+    { name: "user", align: "left"},
+    { name: "position", align: "left"},
+    { name: "phone", align: "center"},
+    { name: "dob", align: "center"},
+    { name: "location", align: "center"},
   ];
   const [rows, setRows] = useState(null);
   
   useEffect(()=>{
     getUserListData()
     .then((res)=>{
-      console.log(res[0]);
+      console.log(res);
       setRows(res.map((idx)=> {
         return {
-          user: <Author image={team2} name={idx[7]} email={idx[6]} />,
-          function: <Function job="Staff" org="" />,
-          status: (
-            <ArgonBadge variant="gradient" badgeContent="offline" color="secondary" size="xs" container />
-          ),
-          employed: (
+          user: <Author image={idx.image} name={idx.name} email={idx.email} />,
+          position: <Function job={idx.position} org="" />,
+          phone: (
             <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
-              15/03/23
+              {idx.phone}
             </ArgonTypography>
           ),
-          action: (
+          dob: (
+            <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
+              {idx.dob.toString().substring(5, 16)}
+            </ArgonTypography>
+          ),
+          location: (
             <ArgonTypography
               component="a"
               href="#"
@@ -57,7 +59,7 @@ function Tables() {
               color="secondary"
               fontWeight="medium"
             >
-              Edit
+              {idx.location}
             </ArgonTypography>
           ),
         }

@@ -22,36 +22,28 @@ import team2 from "assets/images/water.png";
 import React, {useState, useEffect} from 'react';
 import { getScheduleData } from "model/api/api";
 import { getDeviceListData } from "model/api/api";
+import { putAddSchedule } from "model/api/api";
+import { putDelSchedule } from "model/api/api";
 
 
 function MySelect(items)
 {
   return (
-      <select className="schedule-input" style={{padding: "10px", width: items.width}}>
+      <select id = {items.id} className="schedule-input" style={{padding: "10px", width: items.width}}>
               {items.option.map((idx)=>(<option key = {idx.dID} value={idx.dID}>{idx.name}</option>))}
         </select>
   );
 }
 
 function Schedule() {
-  const jobOption = [
-    {value: "water_the_tree", label: "Water the tree"},
-    {value: "turn_on_the_light", label: "Turn on the light"},
-    {value: "open_tarpaulin", label: "Open tarpaulin"}
-  ];
-  var hourOption = [];
-  var minuteOption = [];
-  for(var i = 0; i < 24; i++)
-    hourOption.push({value: i, label: i.toString() + " h"});
-  for(var i = 0; i < 60; i++)
-    minuteOption.push({value: i, label: i + " m"});  
-
-  var periodOption = [
-    {value: "5 minutes", label: "5 minutes"},
-    {value: "15 minutes", label: "15 minutes"},
-    {value: "30 minutes", label: "30 minutes"},
-    {value: "1 hour", label: "1 hour"},
-    {value: "2 hours", label: "2 hours"},
+  const doWOption = [
+    {dID: "Monday", name: "Monday"},
+    {dID: "Tuesday", name: "Tuesday"},
+    {dID: "Wednesday", name: "Wednesday"},
+    {dID: "Thursday", name: "Thursday"},
+    {dID: "Friday", name: "Friday"},
+    {dID: "Saturday", name: "Saturday"},
+    {dID: "Sunday", name: "Sunday"},
   ];
   var columns = [
     { name: "device", align: "left"},
@@ -70,32 +62,44 @@ function Schedule() {
       setDevices(res);
     })
     .catch((err)=>console.log(err));
-    /*
     getScheduleData()
     .then((res)=>{
-      console.log(res)
+      setRows(res.map((e)=> {
+        return {
+          device: <Author image={""} name={e.name}/>,
+          day_of_week: e.dOW,
+          start_time: e.startTime,
+          end_time: e.endTime,
+          action: <Button className="schedule-button" onClick={()=>handleDelete(e.dSID)}>Delete</Button>
+        };
+      }))
     })
     .catch((err)=>console.log(err))
-    */
-    let res = [{"dID": 4000, "dOW": "Monday", "startTime": "15:00", "endTime": "16:00", "name": "Water Pump"},
-    {"dID": 4001, "dOW": "Tuesday", "startTime": "13:00", "endTime": "14:00", "name": "Water Pump"},
-    {"dID": 4002, "dOW": "Monday", "startTime": "12:00", "endTime": "13:00", "name": "Light"}
-  ];
-    setRows(res.map((e)=> {
-      return {
-        device: <Author image={""} name={e.name}/>,
-        day_of_week: e.dOW,
-        start_time: e.startTime,
-        end_time: e.endTime,
-        action: <Button className="schedule-button">Delete</Button>
-      };
-    }))
+   /*
+    let res = [{"dID": 4000, "dSID": 5000, "dOW": "Monday", "startTime": "15:00", "endTime": "16:00", "name": "Water Pump"},
+    {"dID": 4001, "dSID": 5001, "dOW": "Tuesday", "startTime": "13:00", "endTime": "14:00", "name": "Water Pump"},
+    {"dID": 4002, "dSID": 5002, "dOW": "Monday", "startTime": "12:00", "endTime": "13:00", "name": "Light"}
+  ];*/
+    
   }, []);
 
-
+  
   function handleAddSchedule()
   {
+    var dID = document.getElementById("dID").value;
+    var dOW = document.getElementById("dOW").value;
+    var startTime = document.getElementById("st").value;
+    var endTime = document.getElementById("et").value;
+    if (/^([0-5][0-9]:[0-5][0-9])$/.test(startTime) && /^([0-5][0-9]:[0-5][0-9])$/.test(endTime));
+    else
+      alert("Please enter the correct time format (`10:21`)");
+    
+    putAddSchedule({dID, dOW, startTime, endTime})
+  }
 
+  function handleDelete(dSID)
+  {
+    putDelSchedule({dSID})
   }
 
   if (rows && devices)
@@ -115,35 +119,32 @@ function Schedule() {
                     <ArgonTypography style={{fontSize: "16px", padding: "10px"}}><b>Job</b></ArgonTypography>
                   </Grid>
                   <Grid item xs={10} style={{background: "inherit"}}>
-                  <MySelect option={devices} width="calc(100% - 30px)"/>
+                  <MySelect id="dID" option={devices} width="calc(100% - 30px)"/>
                 </Grid>
 
                 <Grid item xs={2} style={{background: "inherit"}}>
-                    <ArgonTypography style={{fontSize: "16px", padding: "10px"}}><b>Date</b></ArgonTypography>
+                    <ArgonTypography style={{fontSize: "16px", padding: "10px"}}><b>DOW</b></ArgonTypography>
                   </Grid>
                   <Grid item xs={10} style={{background: "inherit"}}>
-                  <input className="schedule-input" type="date" style={{padding: "10px", width: "calc(100% - 30px)"}}/>
+                  <MySelect id="dOW" option={doWOption} width="calc(100% - 30px)"/>
                 </Grid>
 
                 <Grid item xs={2} style={{background: "inherit"}}>
-                  <ArgonTypography style={{fontSize: "16px", padding: "10px"}}><b>Time</b></ArgonTypography>
-                </Grid>
-                <Grid item xs={5} style={{background: "inherit"}}>
-                <MySelect option={hourOption} width="calc(100% - 30px)"/>
-                </Grid>
-                <Grid item xs={5} style={{background: "inherit"}}>
-                <MySelect option={minuteOption} width="calc(100% - 30px)"/>
+                    <ArgonTypography style={{fontSize: "16px", padding: "10px"}}><b>Start</b></ArgonTypography>
+                  </Grid>
+                  <Grid item xs={10} style={{background: "inherit"}}>
+                  <input id="st" style={{width: "calc(100% - 30px)", padding: "10px"}}/>
                 </Grid>
 
-                <Grid item xs={3} style={{background: "inherit"}}>
-                  <ArgonTypography style={{fontSize: "16px", padding: "10px"}}><b>Period</b></ArgonTypography>
-                </Grid>
-                <Grid item xs={9} style={{background: "inherit"}}>
-                <MySelect option={periodOption} width="calc(100% - 30px)"/>
+                <Grid item xs={2} style={{background: "inherit"}}>
+                    <ArgonTypography style={{fontSize: "16px", padding: "10px"}}><b>End</b></ArgonTypography>
+                  </Grid>
+                  <Grid item xs={10} style={{background: "inherit"}}>
+                  <input id="et" style={{width: "calc(100% - 30px)", padding: "10px"}}/>
                 </Grid>
 
                 <Grid item xs={12} style={{background: "inherit", textAlign: "center", marginBottom: "20px"}}>
-                <Button className="schedule-button">Create</Button>
+                <Button className="schedule-button" onClick={handleAddSchedule}>Create</Button>
                 </Grid>
 
               </Grid>

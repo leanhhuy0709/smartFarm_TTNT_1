@@ -21,7 +21,10 @@ def getUserDataModel(userID):
             + str(userID)
         cursor.execute(query)
         result = cursor.fetchall()
-        return result
+        return {"userID": result[0][2], "name": result[0][6],
+                    "phone": result[0][4], "email": result[0][5],
+                    "position": result[0][7], "location": result[0][8],
+                    "dob": result[0][9], "image": result[0][12]}
     except KeyError:
         print(KeyError)
 
@@ -53,18 +56,52 @@ def signUpModel(data):
         print(KeyError)
     return "Sign up success"
 
-def getUserListDataModel(userID):
-    pass
+def getUserListDataModel():
+    try:
+        query = "SELECT user.userID, email, name, position, location, DOB, linkref, phoneNumber FROM (account join user on account.userID = user.userID) left join faceImage on user.userID = faceImage.userID"
+        cursor.execute(query)
+        result = cursor.fetchall()
+        result = list(map(lambda e: {"userID": e[0], "name": e[2],
+                    "phone": e[7], "email": e[1],
+                    "position": e[3], "location": e[4],
+                    "dob": e[5], "image": e[6]}, result))
+        return result
+    except KeyError:
+        print(KeyError)
 
 def getDeviceScheduleModel():
-    pass
+    try:
+        query = """SELECT * FROM deviceSchedule join device on deviceSchedule.dID = device.dID"""
+        cursor.execute(query)
+        result = cursor.fetchall()
+        result = list(map(lambda e: {
+            "dSID": e[0],
+            "startTime": str(e[1])[0:5],
+            "endTime": str(e[2])[0:5],
+            "dOW": e[3],
+            "dID": e[4],
+            "name": e[6]
+            }, result))
+        return result
+    except KeyError:
+        print(KeyError)
 
 def addDeviceScheduleModel(data):
-    #data = ["humidity", "17/03/2022", "07:00", "09:00"]
-    pass
+    try:
+        query = """INSERT INTO deviceSchedule(startTime, endTime, dOfW, dID)
+        VALUES (%s, %s, %s, %s);"""
+        cursor.execute(query, (data['startTime'], data['endTime'], data['dOW'], data['dID']))
+    except KeyError:
+        print(KeyError)
+    return "Add success"
 
-def deleteDeviceScheduleModel(deviceScheduleID):
-    pass
+def deleteDeviceScheduleModel(data):
+    try:
+        query = """DELETE FROM deviceSchedule WHERE dSID = """ + str(data["dSID"]) +";"
+        cursor.execute(query)
+    except:
+        print("something")
+    return "Del success"
 
 def getUserAccessModel():
     pass
