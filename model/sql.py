@@ -26,8 +26,32 @@ def getUserDataModel(userID):
         print(KeyError)
 
 def signUpModel(data):
-    print("SignUpModel")
-    return "Hello"
+    # {'name': 'hoang', 'email': 'hoang@gmail.com', 'phone': '0987654321', 'location': 'hcm', 'dob': '2000-01-01', 'image': 'a', 'username': 'hoang', 'password': '1234'}
+    
+    # add to user table
+    try:
+        query = """INSERT INTO user (name, email, phoneNumber, location, dob, position)
+        values(%s, %s, %s, %s, %s, %s);"""
+        cursor.execute(query, (data['name'], data['email'], data['phone'], data['location'], data['dob'], data['position']))
+    except KeyError:
+        print(KeyError)
+    
+    # add to faceImage table
+    try:
+        query = """INSERT INTO faceImage (label, linkref, userID)
+        values(%s, %s, (SELECT MAX(userID) from user));"""
+        cursor.execute(query, (data['name'], data['image']))
+    except KeyError:
+        print(KeyError)
+    
+    # add to account table
+    try:
+        query = """INSERT INTO account (username, password, userID)
+        values(%s, %s, (SELECT MAX(userID) from user));"""
+        cursor.execute(query, (data['username'], data['password']))
+    except KeyError:
+        print(KeyError)
+    return "Sign up success"
 
 def getUserListDataModel(userID):
     pass

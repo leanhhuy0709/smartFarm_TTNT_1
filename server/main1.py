@@ -6,54 +6,54 @@ from flask_cors import CORS
 import json
 import mysql.connector
 
-cnx = mysql.connector.connect(user='root', password='hhd552002',
+cnx = mysql.connector.connect(user='root', password='123456',
                             host='127.0.0.1',port = '3306',
                             database='smartfarmdb',auth_plugin='mysql_native_password')
 cursor = cnx.cursor()
 
-AIO_FEED_IDS = ["humidity", "luminance", "temperature"]
-AIO_USERNAME = "leanhhuy"
-AIO_KEY = "aio_sNIp33jRMtm1pN0NE57pt4I6lNhR"
+# AIO_FEED_IDS = ["humidity", "luminance", "temperature"]
+# AIO_USERNAME = "leanhhuy"
+# AIO_KEY = "aio_sNIp33jRMtm1pN0NE57pt4I6lNhR"
 
-humidityData = []
-luminanceData = []
-temperatureData = []
-accountData = []
+# humidityData = []
+# luminanceData = []
+# temperatureData = []
+# accountData = []
 
-def  connected(client):
-    print("Ket noi thanh cong...")
-    for feed in AIO_FEED_IDS:
-        client.subscribe(feed)
+# def  connected(client):
+#     print("Ket noi thanh cong...")
+#     for feed in AIO_FEED_IDS:
+#         client.subscribe(feed)
 
-def subscribe(client,userdata,mid,granted_qos) :
-    print("Subscribe " + AIO_FEED_IDS[mid - 1] + " thanh cong ...")
+# def subscribe(client,userdata,mid,granted_qos) :
+#     print("Subscribe " + AIO_FEED_IDS[mid - 1] + " thanh cong ...")
 
-def disconnected(client):
-    print("Ngat ket noi ...")
-    sys.exit(1)
+# def disconnected(client):
+#     print("Ngat ket noi ...")
+#     sys.exit(1)
 
-def  message(client , feed_id , payload):
-    now = datetime.now()
-    current_time = now.strftime("%H:%M:%S %D")
-    print("Nhan du lieu tu " + feed_id + ": " + payload + " at " + current_time)
-    if feed_id == "humidity":
-        humidityData.append([payload, current_time])
-        data = (current_time,'A1','humidity',payload)
-        sql = "INSERT INTO sensor(timestamp,location,type,value) VALUES (%s,%s,%s,%s)"
-        cursor.execute(sql,data)
-        cnx.commit()
-    if feed_id == "luminance":
-        luminanceData.append([payload, current_time])
-    if feed_id == "temperature":
-        temperatureData.append([payload, current_time])
+# def  message(client , feed_id , payload):
+#     now = datetime.now()
+#     current_time = now.strftime("%H:%M:%S %D")
+#     print("Nhan du lieu tu " + feed_id + ": " + payload + " at " + current_time)
+#     if feed_id == "humidity":
+#         humidityData.append([payload, current_time])
+#         data = (current_time,'A1','humidity',payload)
+#         sql = "INSERT INTO sensor(timestamp,location,type,value) VALUES (%s,%s,%s,%s)"
+#         cursor.execute(sql,data)
+#         cnx.commit()
+#     if feed_id == "luminance":
+#         luminanceData.append([payload, current_time])
+#     if feed_id == "temperature":
+#         temperatureData.append([payload, current_time])
 
-client = MQTTClient(AIO_USERNAME , AIO_KEY)
-client.on_connect = connected
-client.on_disconnect = disconnected
-client.on_message = message
-client.on_subscribe = subscribe
-client.connect()
-client.loop_background()
+# client = MQTTClient(AIO_USERNAME , AIO_KEY)
+# client.on_connect = connected
+# client.on_disconnect = disconnected
+# client.on_message = message
+# client.on_subscribe = subscribe
+# client.connect()
+# client.loop_background()
 
 
 #--------------------------------------------------
