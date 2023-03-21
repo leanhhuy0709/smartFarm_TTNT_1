@@ -69,7 +69,7 @@ def addData():
         #Water pump, Tarpaulin, Light
         if i["name"] == "Water pump": feedsName = "water-pump"
         elif i["name"] == "Tarpaulin": feedsName = "tarpaulin"
-        elif i["name"] == "Light": feedsName = "led-grb"
+        elif i["name"] == "Light": feedsName = "led-rgb"
         if i["dOW"] == dOW and timeLessOrEqualThan(i["startTime"], current_time) and timeLessOrEqualThan(current_time, i["endTime"]):
             client.publish(feedsName, 1, group_id = GROUP_NAME)
             print("Added 1 to " + feedsName)
