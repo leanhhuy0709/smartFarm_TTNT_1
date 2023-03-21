@@ -17,6 +17,12 @@ import Slider from "layouts/dashboard/components/Slider";
 
 import { getHumidityData, getTemperatureData, getLuminanceData } from "model/api/api";
 
+
+function round2Dec(num)
+{
+  return Math.round(num * 100)/100
+}
+
 function Default() {
 
   const [rawHData, setRawHData] = useState(null);
@@ -106,25 +112,25 @@ function Default() {
           <Grid item xs={12} md={6} lg={3}>
             <DetailedStatisticsCard
               title="Recent temperature"
-              count={tData.datasets[0].data.length > 0 ?`${tData.datasets[0].data[tData.datasets[0].data.length - 1]} \u2103`: ''}
+              count={tData.datasets[0].data.length > 0 ?`${round2Dec(tData.datasets[0].data[tData.datasets[0].data.length - 1])} \u2103`: ''}
               icon={{ color: "info", component: <i className='fa fa-thermometer'/> }}
-              percentage={{ color: `${tData.datasets[0].data[tData.datasets[0].data.length - 1] - tData.datasets[0].data[tData.datasets[0].data.length - 2] > 0 ? "success":"error"}`, count:`${tData.datasets[0].data[tData.datasets[0].data.length - 1] - tData.datasets[0].data[tData.datasets[0].data.length - 2] > 0 ? '+':''}${tData.datasets[0].data[tData.datasets[0].data.length - 1] - tData.datasets[0].data[tData.datasets[0].data.length - 2]} \u2103`, text: "since one hour" }}
+              percentage={{ color: `${tData.datasets[0].data[tData.datasets[0].data.length - 1] - tData.datasets[0].data[tData.datasets[0].data.length - 2] >= 0 ? "success":"error"}`, count:`${tData.datasets[0].data[tData.datasets[0].data.length - 1] - tData.datasets[0].data[tData.datasets[0].data.length - 2] > 0 ? '+':''}${round2Dec(tData.datasets[0].data[tData.datasets[0].data.length - 1] - tData.datasets[0].data[tData.datasets[0].data.length - 2])} \u2103`, text: "since one hour" }}
             />
           </Grid>
           <Grid item xs={12} md={6} lg={3}>
             <DetailedStatisticsCard
               title="Recent humidity"
-              count={hData.datasets[0].data.length > 0 ?`${hData.datasets[0].data[hData.datasets[0].data.length - 1]} %`: ''}
+              count={hData.datasets[0].data.length > 0 ?`${round2Dec(hData.datasets[0].data[hData.datasets[0].data.length - 1])} %`: ''}
               icon={{ color: "error", component: <i className="fa fa-tint" /> }}
-              percentage={{ color: `${hData.datasets[0].data[hData.datasets[0].data.length - 1] - hData.datasets[0].data[hData.datasets[0].data.length - 2] > 0 ? "success":"error"}`, count:`${hData.datasets[0].data[hData.datasets[0].data.length - 1] - hData.datasets[0].data[hData.datasets[0].data.length - 2] > 0 ? '+':''}${hData.datasets[0].data[hData.datasets[0].data.length - 1] - hData.datasets[0].data[hData.datasets[0].data.length - 2]} %`, text: "since one hour" }}
+              percentage={{ color: `${hData.datasets[0].data[hData.datasets[0].data.length - 1] - hData.datasets[0].data[hData.datasets[0].data.length - 2] >= 0 ? "success":"error"}`, count:`${hData.datasets[0].data[hData.datasets[0].data.length - 1] - hData.datasets[0].data[hData.datasets[0].data.length - 2] > 0 ? '+':''}${round2Dec(hData.datasets[0].data[hData.datasets[0].data.length - 1] - hData.datasets[0].data[hData.datasets[0].data.length - 2])} %`, text: "since one hour" }}
             />
           </Grid>
           <Grid item xs={12} md={6} lg={3}>
             <DetailedStatisticsCard
               title="Recent luminance"
-              count={lData.datasets[0].data.length > 0 ?`${lData.datasets[0].data[lData.datasets[0].data.length - 1]} nm`: ''}
+              count={lData.datasets[0].data.length > 0 ?`${round2Dec(lData.datasets[0].data[lData.datasets[0].data.length - 1])} nm`: ''}
               icon={{ color: "success", component: <i className="fa fa-lightbulb-o" /> }}
-              percentage={{ color: `${lData.datasets[0].data[lData.datasets[0].data.length - 1] - lData.datasets[0].data[lData.datasets[0].data.length - 2] > 0 ? "success":"error"}`, count:`${lData.datasets[0].data[lData.datasets[0].data.length - 1] - lData.datasets[0].data[lData.datasets[0].data.length - 2] > 0 ? '+':''}${lData.datasets[0].data[lData.datasets[0].data.length - 1] - lData.datasets[0].data[lData.datasets[0].data.length - 2]} nm`, text: "since one hour" }}
+              percentage={{ color: `${lData.datasets[0].data[lData.datasets[0].data.length - 1] - lData.datasets[0].data[lData.datasets[0].data.length - 2] >= 0 ? "success":"error"}`, count:`${lData.datasets[0].data[lData.datasets[0].data.length - 1] - lData.datasets[0].data[lData.datasets[0].data.length - 2] > 0 ? '+':''}${round2Dec(lData.datasets[0].data[lData.datasets[0].data.length - 1] - lData.datasets[0].data[lData.datasets[0].data.length - 2])} nm`, text: "since one hour" }}
             />
           </Grid>
           <Grid item xs={12} md={6} lg={3}>

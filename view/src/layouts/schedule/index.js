@@ -1,13 +1,10 @@
 // @mui material components
 import Card from "@mui/material/Card";
 import { Button, Grid, Checkbox } from "@mui/material";
-import ArgonInput from "components/ArgonInput";
 
 // Argon Dashboard 2 MUI components
 import ArgonBox from "components/ArgonBox";
 import ArgonTypography from "components/ArgonTypography";
-import ArgonButton from "components/ArgonButton";
-import ArgonBadge from "components/ArgonBadge";
 
 // Argon Dashboard 2 MUI examples
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -17,14 +14,13 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
 import CSS from './index.css';
 import Table from "examples/Tables/Table";
-import {Author, Function} from "layouts/tables/data/authorsTableData";
-import team2 from "assets/images/water.png";
+import {Author} from "layouts/tables/data/authorsTableData";
 import React, {useState, useEffect} from 'react';
 import { getScheduleData } from "model/api/api";
 import { getDeviceListData } from "model/api/api";
 import { putAddSchedule } from "model/api/api";
 import { putDelSchedule } from "model/api/api";
-
+import ArgonAlert from "components/ArgonAlert";
 
 function MySelect(items)
 {
@@ -93,13 +89,36 @@ function Schedule() {
     if (/^([0-5][0-9]:[0-5][0-9])$/.test(startTime) && /^([0-5][0-9]:[0-5][0-9])$/.test(endTime));
     else
       alert("Please enter the correct time format (`10:21`)");
+
     
     putAddSchedule({dID, dOW, startTime, endTime})
+    .then((res)=>
+    {
+      if(res.message)
+      {
+        alert("Add complete!");
+        location.reload();
+      }
+      else 
+        alert("Add failed!");
+    })
+    .catch((err)=>console.log(err))
   }
 
   function handleDelete(dSID)
   {
     putDelSchedule({dSID})
+    .then((res)=>
+    {
+      if(res.message)
+      {
+        alert("Delete complete!");
+        location.reload()
+      }
+      else 
+        alert("Delete failed!");
+    })
+    .catch((err)=>console.log(err))
   }
 
   if (rows && devices)
@@ -150,7 +169,6 @@ function Schedule() {
               </Grid>
             </Card>
           </Grid>
-
           <Grid item xs={12} lg={6}>
             <Card>
               <Grid container spacing={3} style={{background: "inherit"}}>

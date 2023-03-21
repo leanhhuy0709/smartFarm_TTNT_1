@@ -1,4 +1,4 @@
-from model.sql import *
+from model.sqlQuery import *
 import jwt
 from flask import Flask, jsonify, request
 from flask_cors import CORS
@@ -33,7 +33,9 @@ def loginController():
     body = request.get_json()
     username = body['username']
     password = body['password']
-    [userID, position] = loginModel(username, password)
+    temp = loginModel(username, password)
+    if temp == {"message": False}: return jsonify(temp)
+    [userID, position] = temp
     # Tạo payload của token, bao gồm userID
     payload = {"userID": userID}
 
@@ -62,7 +64,7 @@ def signUpController():
     '''
     body = request.get_json()
     #print(body["data"])
-    return signUpModel(body["data"])
+    return jsonify(signUpModel(body["data"]))
     
     
 
@@ -85,17 +87,19 @@ def addDeviceScheduleController():
     token = request.headers.get('token')
     userID = encodeToken(token)
     body = request.get_json()
-    return addDeviceScheduleModel(body["data"])
+    temp = addDeviceScheduleModel(body["data"])
+    
+    if temp == {"message": False}: return jsonify(temp)
+    return jsonify(temp)
 
 @app.route('/del-schedule', methods=['PUT']) 
 def deleteDeviceScheduleController():
     token = request.headers.get('token')
     userID = encodeToken(token)
     body = request.get_json()
-    
-    
-    return deleteDeviceScheduleModel(body['data'])
-    pass
+    temp = deleteDeviceScheduleModel(body['data'])
+    if temp == {"message": False}: return jsonify(temp)
+    return jsonify(temp)
 
 @app.route('/user-face-detect', methods=['GET']) 
 def getUserAccessController():
@@ -115,5 +119,5 @@ def f():
 def getDeviceListController():
     token = request.headers.get('token')
     userID = encodeToken(token)
-    return getDeviceListModel()
+    return json.dumps(getDeviceListModel())
     

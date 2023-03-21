@@ -31,6 +31,10 @@ function Illustration() {
     var psw = document.getElementById("psw").value;
     postSignIn(usr, psw)
     .then((res)=>{
+      if (res["message"] == false) {
+        alert("Username or password is wrong!")
+        return;
+      }
       localStorage.setItem("token", res["token"]);
       localStorage.setItem("isAdmin", res["isAdmin"]);
       window.location.pathname = "dashboard";
