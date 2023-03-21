@@ -6,6 +6,8 @@ model/__pycache__
 model/adafruit.py
 view/node_modules
 .DS_Store
+venv
+node_modules
 
 # testing
 /coverage
