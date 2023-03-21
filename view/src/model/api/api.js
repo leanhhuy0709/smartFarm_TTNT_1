@@ -14,7 +14,7 @@ const apiDeviceList = '/devicelist';
 const apiAddSchedule = '/add-schedule';
 const apiDelSchedule = '/del-schedule';
 
-const key = "aio_Nghv11XLOofrl6zDSqDd6bCA4lQC";//Key của Hưng!!! Không để ở đây được vì nó sẽ đổi key nếu up lên github
+const key = "";//Key của Hưng!!! Không để ở đây được vì nó sẽ đổi key nếu up lên github
 
 export const getHumidityData = async () => {
     //const result = await axios.get(host + apiHumidity);    

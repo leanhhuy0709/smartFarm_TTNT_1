@@ -10,7 +10,7 @@ from sqlQuery import *
 
 AIO_FEED_IDS = []
 AIO_USERNAME = "vanhung4320"
-AIO_KEY = "aio_Nghv11XLOofrl6zDSqDd6bCA4lQC"
+AIO_KEY = "" #Key cua Hung
 GROUP_NAME = 'smart-farm-ttnt'
 
 def  connected(client):
