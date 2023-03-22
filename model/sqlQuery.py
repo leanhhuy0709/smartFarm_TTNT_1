@@ -1,5 +1,6 @@
 import json
 import mysql.connector
+from datetime import datetime
 
 cnx = mysql.connector.connect(user='root', password='',
                             host='127.0.0.1',port = '3306',
@@ -89,6 +90,14 @@ def getUserListDataModel():
     except:
         print("getUserListDataModel Error!")
 
+def setTimeFormat(str):
+    #8:9
+    if str[1] == ":":
+        if len(str) == 3: return "0" + str[0:2] + "0" + str[2]
+        else: return "0" + str
+    elif len(str) == 4: return str[0:3] + "0" + str[3]
+    return str
+
 def getDeviceScheduleModel():
     try:
         query = """SELECT * FROM deviceSchedule join device on deviceSchedule.dID = device.dID"""
@@ -96,8 +105,8 @@ def getDeviceScheduleModel():
         result = cursor.fetchall()
         result = list(map(lambda e: {
             "dSID": e[0],
-            "startTime": str(e[1])[0:5],
-            "endTime": str(e[2])[0:5],
+            "startTime": setTimeFormat(str(e[1])),#8:12:12
+            "endTime": setTimeFormat(str(e[2])),
             "dOW": e[3],
             "dID": e[4],
             "name": e[6]

@@ -76,7 +76,7 @@ CREATE TABLE `deviceSchedule` (
 );
 
 
-
+select * from `deviceSchedule`;
 
 -- insert data
 INSERT INTO user VALUES (1, "0123456789", "huy.leanh0709@hcmut.edu.vn", "Le Anh Huy", "Admin", "Viet Nam", "2002-09-07");

@@ -10,7 +10,7 @@ from sqlQuery import *
 
 AIO_FEED_IDS = []
 AIO_USERNAME = "vanhung4320"
-AIO_KEY = "" #Key cua Hung
+AIO_KEY = "aio_AArT32TcBOoL6TTNSInJ36UvLnTe" #Key cua Hung
 GROUP_NAME = 'smart-farm-ttnt'
 
 def  connected(client):
@@ -70,6 +70,7 @@ def addData():
         if i["name"] == "Water pump": feedsName = "water-pump"
         elif i["name"] == "Tarpaulin": feedsName = "tarpaulin"
         elif i["name"] == "Light": feedsName = "led-rgb"
+        else: print(i)
         if i["dOW"] == dOW and timeLessOrEqualThan(i["startTime"], current_time) and timeLessOrEqualThan(current_time, i["endTime"]):
             client.publish(feedsName, 1, group_id = GROUP_NAME)
             print("Added 1 to " + feedsName)

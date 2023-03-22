@@ -142,7 +142,7 @@ function Schedule() {
                 </Grid>
 
                 <Grid item xs={2} style={{background: "inherit"}}>
-                    <ArgonTypography style={{fontSize: "16px", padding: "10px"}}><b>DOW</b></ArgonTypography>
+                    <ArgonTypography style={{fontSize: "16px", padding: "5px"}}><b>DOW</b></ArgonTypography>
                   </Grid>
                   <Grid item xs={10} style={{background: "inherit"}}>
                   <MySelect id="dOW" option={doWOption} width="calc(100% - 30px)"/>
