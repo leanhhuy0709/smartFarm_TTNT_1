@@ -55,6 +55,7 @@ function Default() {
   useEffect(()=>{
     getHumidityData()
     .then((res)=>{
+      console.log(res);
       setRawHData(res);
       setHData(convertToChartData("Humidity", res, today.getDate()));
     })
