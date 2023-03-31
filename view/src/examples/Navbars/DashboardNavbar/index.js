@@ -96,26 +96,15 @@ function DashboardNavbar({ absolute, light, isMini }) {
       sx={{ mt: 2 }}
     >
       <NotificationItem
-        image={<img src={team2} alt="person" />}
-        title={["New message", "from Laur"]}
-        date="13 minutes ago"
+        image={<img src='https://thumbs.dreamstime.com/b/thermometer-sun-hot-weather-vector-illustration-transparency-mesh-grid-224918588.jpg'/>}
+        title={["Alert:", "Temperature is too high"]}
+        date="13 hours ago"
         onClick={handleCloseMenu}
       />
       <NotificationItem
-        image={<img src={logoSpotify} alt="person" />}
-        title={["New album", "by Travis Scott"]}
+        image={<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWGbreE8wgglVhpUgovnE_XcNy4vZwZpb8tQ&usqp=CAU'  />}
+        title={["Alert", "Temperature is too low"]}
         date="1 day"
-        onClick={handleCloseMenu}
-      />
-      <NotificationItem
-        color="secondary"
-        image={
-          <Icon fontSize="small" sx={{ color: ({ palette: { white } }) => white.main }}>
-            payment
-          </Icon>
-        }
-        title={["", "Payment successfully completed"]}
-        date="2 days"
         onClick={handleCloseMenu}
       />
     </Menu>

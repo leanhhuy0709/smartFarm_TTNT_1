@@ -9,7 +9,7 @@ face_detector = cv2.CascadeClassifier('haarcascades/haarcascade_frontalface_defa
 
 
 
-name_dict = {0: 'Minh-My-2013811', 1: 'Van-Hung-2013401', 2: 'Huy-Hoang-2013xxx', 3: 'Anh-Huy-2013xxx'}
+name_dict = {0: 'Minh-My-2013811', 1: 'Van-Hung-2013401', 2: 'Huy-Hoang-2013219', 3: 'Anh-Huy-2013293'}
 cap = cv2.VideoCapture(0)
 while True:
     ret, frame = cap.read()

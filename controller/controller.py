@@ -1,4 +1,4 @@
-from model.sql import *
+from model.sqlQuery import *
 import jwt
 from flask import Flask, jsonify, request
 from flask_cors import CORS
@@ -33,7 +33,9 @@ def loginController():
     body = request.get_json()
     username = body['username']
     password = body['password']
-    [userID, position] = loginModel(username, password)
+    temp = loginModel(username, password)
+    if temp == {"message": False}: return jsonify(temp)
+    [userID, position] = temp
     # Tạo payload của token, bao gồm userID
     payload = {"userID": userID}
 
@@ -51,10 +53,7 @@ def getUserDataController():
     token = request.headers.get('token')
     userID = encodeToken(token)
     result = getUserDataModel(userID)
-    return  jsonify({"userID": result[0][2], "name": result[0][6],
-                    "phone": result[0][4], "email": result[0][5],
-                    "position": result[0][7], "location": result[0][8],
-                    "dob": result[0][9], "image": result[0][12]})
+    return  jsonify(result)
    
 @app.route('/signup', methods=['POST']) 
 def signUpController():
@@ -65,7 +64,7 @@ def signUpController():
     '''
     body = request.get_json()
     #print(body["data"])
-    return signUpModel(body["data"])
+    return jsonify(signUpModel(body["data"]))
     
     
 
@@ -74,29 +73,33 @@ def getUserListController():
     #Kiểm tra userID có phải người dùng hay không?
     token = request.headers.get('token')
     userID = encodeToken(token)
-    userIDList = getUserListDataModel()
-    pass
+    return jsonify(getUserListDataModel())
 
 @app.route('/schedule') 
 def getDeviceScheduleController():
     token = request.headers.get('token')
     userID = encodeToken(token)
-    pass
+    return jsonify(getDeviceScheduleModel())
 
 @app.route('/add-schedule', methods=['PUT']) 
-def addDeviceScheduleController(data):
+def addDeviceScheduleController():
     #data = ["humidity", "17/03/2022", "07:00", "09:00"]
     token = request.headers.get('token')
     userID = encodeToken(token)
-    pass
+    body = request.get_json()
+    temp = addDeviceScheduleModel(body["data"])
+    
+    if temp == {"message": False}: return jsonify(temp)
+    return jsonify(temp)
 
 @app.route('/del-schedule', methods=['PUT']) 
-def deleteDeviceScheduleController(deviceScheduleID):
+def deleteDeviceScheduleController():
     token = request.headers.get('token')
     userID = encodeToken(token)
-    body = request.get_json() 
-    print(body['id']) #body['id'] = Là id của device schedule
-    pass
+    body = request.get_json()
+    temp = deleteDeviceScheduleModel(body['data'])
+    if temp == {"message": False}: return jsonify(temp)
+    return jsonify(temp)
 
 @app.route('/user-face-detect', methods=['GET']) 
 def getUserAccessController():
@@ -116,5 +119,5 @@ def f():
 def getDeviceListController():
     token = request.headers.get('token')
     userID = encodeToken(token)
-    return getDeviceListModel()
+    return json.dumps(getDeviceListModel())
     

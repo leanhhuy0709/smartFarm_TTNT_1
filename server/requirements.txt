@@ -1,4 +1,0 @@
-Adafruit_IO==2.7.0
-Flask==2.2.3
-Flask_Cors==3.0.10
-mysql-connector-python==8.0.32

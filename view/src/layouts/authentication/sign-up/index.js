@@ -34,6 +34,10 @@ function Cover() {
     }
     postSignUp(data)
     .then((res)=>{
+      if (res["message"] == false) {
+        alert("Username already exists!")
+        return;
+      }
       window.location.pathname = "/authentication/sign-in";
     })
     .catch((err)=>console.log(err))
