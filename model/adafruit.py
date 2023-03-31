@@ -10,7 +10,7 @@ from sqlQuery import *
 
 AIO_FEED_IDS = []
 AIO_USERNAME = "vanhung4320"
-AIO_KEY = "aio_AArT32TcBOoL6TTNSInJ36UvLnTe" #Key cua Hung
+AIO_KEY = "" #Key cua Hung
 GROUP_NAME = 'smart-farm-ttnt'
 
 def  connected(client):
@@ -82,6 +82,6 @@ print("Adafruit python server is running!")
 while True:
     scheduleData = loadSchedule()
     addData()
-    time.sleep(10)
+    time.sleep(60)
 
     
