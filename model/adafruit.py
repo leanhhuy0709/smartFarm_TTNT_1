@@ -10,6 +10,7 @@ from key import AIO_KEY;
 
 AIO_FEED_IDS = []
 AIO_USERNAME = "vanhung4320"
+AIO_KEY = "" 
 GROUP_NAME = 'smart-farm-ttnt'
 
 def  connected(client):
