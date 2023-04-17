@@ -21,81 +21,83 @@ import team2 from "assets/images/team-2.jpg";
 import team3 from "assets/images/team-3.jpg";
 import team4 from "assets/images/team-4.jpg";
 
+import {Button} from "react-bootstrap";
 
 function Tables() {
   //const { columns, rows } = authorsTableData;
-  var columns = [
-    { name: "user", align: "left"},
-    { name: "position", align: "left"},
-    { name: "phone", align: "center"},
-    { name: "dob", align: "center"},
-    { name: "location", align: "center"},
-  ];
-  const [rows, setRows] = useState(null);
+    var columns = [
+        { name: "user", align: "left"},
+        { name: "position", align: "left"},
+        { name: "phone", align: "center"},
+        { name: "dob", align: "center"},
+        { name: "location", align: "center"},
+    ];
+    const [rows, setRows] = useState(null);
   
-  useEffect(()=>{
-    getUserListData()
-    .then((res)=>{
-      console.log(res);
-      setRows(res.map((idx)=> {
-        return {
-          user: <Author image={idx.image} name={idx.name} email={idx.email} />,
-          position: <Function job={idx.position} org="" />,
-          phone: (
-            <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
-              {idx.phone}
-            </ArgonTypography>
-          ),
-          dob: (
-            <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
-              {idx.dob.toString().substring(5, 16)}
-            </ArgonTypography>
-          ),
-          location: (
-            <ArgonTypography
-              component="a"
-              href="#"
-              variant="caption"
-              color="secondary"
-              fontWeight="medium"
-            >
-              {idx.location}
-            </ArgonTypography>
-          ),
-        }
-      }))
-    })
-    .catch((err)=>{
-      console.log(err);
-    })
-  }, [])
-  if (rows)
-  return (
-    <DashboardLayout>
-      <DashboardNavbar />
-      <ArgonBox py={3}>
-        <ArgonBox mb={3}>
-          <Card>
-            <ArgonBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
-              <ArgonTypography variant="h6">User List</ArgonTypography>
+    useEffect(()=>{
+        getUserListData()
+        .then((res)=>{
+        console.log(res);
+        setRows(res.map((idx)=> {
+            return {
+            user: <Author image={idx.image} name={idx.name} email={idx.email} />,
+            position: <Function job={idx.position} org="" />,
+            phone: (
+                <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
+                {idx.phone}
+                </ArgonTypography>
+            ),
+            dob: (
+                <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
+                {idx.dob.toString().substring(5, 16)}
+                </ArgonTypography>
+            ),
+            location: (
+                <ArgonTypography
+                component="a"
+                href="#"
+                variant="caption"
+                color="secondary"
+                fontWeight="medium"
+                >
+                {idx.location}
+                </ArgonTypography>
+            ),
+            }
+        }))
+        })
+        .catch((err)=>{
+        console.log(err);
+        })
+    }, []);
+
+    if (rows)
+    return (
+        <DashboardLayout>
+        <DashboardNavbar />
+        <ArgonBox py={3}>
+            <ArgonBox mb={3}>
+            <Card>
+                <ArgonBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
+                <ArgonTypography variant="h6">User List</ArgonTypography>
+                </ArgonBox>
+                <ArgonBox
+                sx={{
+                    "& .MuiTableRow-root:not(:last-child)": {
+                    "& td": {
+                        borderBottom: ({ borders: { borderWidth, borderColor } }) =>
+                        `${borderWidth[1]} solid ${borderColor}`,
+                    },
+                    },
+                }}
+                >
+                <Table columns={columns} rows={rows} />
+                </ArgonBox>
+            </Card>
             </ArgonBox>
-            <ArgonBox
-              sx={{
-                "& .MuiTableRow-root:not(:last-child)": {
-                  "& td": {
-                    borderBottom: ({ borders: { borderWidth, borderColor } }) =>
-                      `${borderWidth[1]} solid ${borderColor}`,
-                  },
-                },
-              }}
-            >
-              <Table columns={columns} rows={rows} />
-            </ArgonBox>
-          </Card>
+            
         </ArgonBox>
-        
-      </ArgonBox>
-    </DashboardLayout>
+        </DashboardLayout>
   );
 }
 

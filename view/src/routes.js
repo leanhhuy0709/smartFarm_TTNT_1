@@ -7,6 +7,7 @@ import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 import Schedule from "layouts/schedule";
 import UserAI from "layouts/UserAI";
+import Debug from "layouts/debug";
 
 // Argon Dashboard 2 MUI components
 import ArgonBox from "components/ArgonBox";
@@ -72,6 +73,14 @@ var routes = [
     route: "/authentication/sign-up",
     icon: <ArgonBox component="i" color="info" fontSize="14px" className="ni ni-collection" />,
     component: <SignUp />,
+  },
+  {
+    type: "route",
+    name: "Debug",
+    key: "debug",
+    route: "/debug",
+    icon: <ArgonBox component="i" color="info" fontSize="14px" className="ni ni-collection" />,
+    component: <Debug />,
   }
 ];
 

@@ -3,6 +3,7 @@
 # dependencies
 controller/__pycache__
 model/__pycache__
+model/key.py
 view/node_modules
 .DS_Store
 venv
