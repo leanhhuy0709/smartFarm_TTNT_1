@@ -1,28 +1,44 @@
-// @mui material components
-import Card from "@mui/material/Card";
+import React, { useState, useEffect } from 'react';
+import mqtt from 'mqtt';//
+import {Buffer} from 'buffer';
+function App() {
+  const [client, setClient] = useState(null);
 
-// Argon Dashboard 2 MUI components
-import ArgonBox from "components/ArgonBox";
-import ArgonTypography from "components/ArgonTypography";
-import ArgonBadge from "components/ArgonBadge";
+  useEffect(() => {
+    // Kết nối MQTT client đến Adafruit IO
+    const options = {
+      protocol: 'mqtts',
+      username: 'leanhhuy',
+      password: 'aio_Gsda08OV8x6IQ6LLSMTrwSN2mUgc'
+    };
+    const newClient = mqtt.connect('mqtts://io.adafruit.com', options);
 
-// Argon Dashboard 2 MUI examples
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
+    newClient.subscribe('leanhhuy/feeds/humidity');
+    
+    console.log(newClient);
+    newClient.on('message', (topic, message) => {
+      console.log(`Received message from ${topic}: ${message.toString()}`);
+    });
+    // Lưu client vào state
+    setClient(newClient);
 
-import mqtt from 'mqtt';
+    // Hủy kết nối khi component unmount
+    return () => {
+      newClient.end();
+    };
+  }, []);
 
-export default function Debug() {
-    //create mqtt connection
-    //const client = mqtt.connect('abc');
-    return (
-        <DashboardLayout>
-        <DashboardNavbar />
-        <ArgonBox py={3}>
-            <p>Debug</p>
-            <button>Click me!</button>
-        </ArgonBox>
-        </DashboardLayout>
-    );
+  const sendMessage = () => {
+    // Gửi tin nhắn đến topic 'test'
+    client.publish('leanhhuy/feeds/humidity', "100");
+    console.log('Sent');
+  };
+
+  return (
+    <div>
+      <button onClick={sendMessage}>Send Message</button>
+    </div>
+  );
 }
 
+export default App;

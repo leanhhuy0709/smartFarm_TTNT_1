@@ -48,7 +48,7 @@ def loginController():
     isAdmin = (position == "Admin")
     return jsonify({"token": temp, "isAdmin": isAdmin})
 
-@app.route('/user')
+@app.route('/user', methods=['GET'])
 def getUserDataController():
     token = request.headers.get('token')
     userID = encodeToken(token)
@@ -115,9 +115,10 @@ def f():
     #print(body['temperature'])#True or False
     #print(body['luminance'])#True or False
 
-@app.route('/devicelist', methods=['GET'])
+@app.route('/devicelist', methods=['GET', 'OPTIONS'])
 def getDeviceListController():
-    token = request.headers.get('token')
+    token = request.headers.get('Authorization')
     userID = encodeToken(token)
     return json.dumps(getDeviceListModel())
+
     

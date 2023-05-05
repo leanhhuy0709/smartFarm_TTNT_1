@@ -1,10 +1,20 @@
 import axios from 'axios';
 
 const host = 'http://localhost:8000';
-const apiHumidity = 'https://io.adafruit.com/api/v2/vanhung4320/feeds/smart-farm-ttnt.humidity/data?key=';
 //https://io.adafruit.com/api/v2/vanhung4320/feeds/smart-farm-ttnt.humidity/data
+/*
+const apiHumidity = 'https://io.adafruit.com/api/v2/vanhung4320/feeds/smart-farm-ttnt.humidity/data?key=';
 const apiTemperature = 'https://io.adafruit.com/api/v2/vanhung4320/feeds/smart-farm-ttnt.temperature/data?key=';
 const apiLuminance = 'https://io.adafruit.com/api/v2/vanhung4320/feeds/smart-farm-ttnt.luminance/data?key=';
+*/
+
+const apiHumidity = 'https://io.adafruit.com/api/v2/leanhhuy/feeds/humidity/data?key=';
+const apiTemperature = 'https://io.adafruit.com/api/v2/leanhhuy/feeds/temperature/data?key=';
+const apiLuminance = 'https://io.adafruit.com/api/v2/leanhhuy/feeds/luminance/data?key=';
+const apiBtnH = 'https://io.adafruit.com/api/v2/leanhhuy/feeds/humidity';
+const apiBtnT = 'https://io.adafruit.com/api/v2/leanhhuy/feeds/temperature';
+const apiBtnL = 'https://io.adafruit.com/api/v2/leanhhuy/feeds/luminance';
+
 const apiSignIn = '/login';
 const apiSignUp = '/signup';
 const apiUser = '/user';
@@ -14,7 +24,7 @@ const apiDeviceList = '/devicelist';
 const apiAddSchedule = '/add-schedule';
 const apiDelSchedule = '/del-schedule';
 
-const key = "";//Key của Hưng!!! Không để ở đây được vì nó sẽ đổi key nếu up lên github
+const key = "aio_Gsda08OV8x6IQ6LLSMTrwSN2mUgc";//Key của Hưng!!! Không để ở đây được vì nó sẽ đổi key nếu up lên github
 
 export const getHumidityData = async () => {
     //const result = await axios.get(host + apiHumidity);    
@@ -102,5 +112,23 @@ export const putDelSchedule = async (data) =>
           },
         data});
     return result.data;
+}
+
+export const getButtonHumidity = async () => 
+{
+    const result = await axios.get(apiBtnH);
+    return result.data.last_value;
+}
+
+export const getButtonTemperature = async () => 
+{
+    const result = await axios.get(apiBtnT);
+    return result.data.last_value;
+}
+
+export const getButtonLuminance = async () => 
+{
+    const result = await axios.get(apiBtnL);
+    return result.data.last_value;
 }
 

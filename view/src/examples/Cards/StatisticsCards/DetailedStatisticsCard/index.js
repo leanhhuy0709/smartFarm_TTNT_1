@@ -61,7 +61,6 @@ function DetailedStaticsCard({ bgColor, title, count, percentage, icon, directio
                     <ArgonBox
                       fontSize="1.125rem"
                       display="grid"
-                      placeItems="center"
                       color="inherit"
                     >
                       {icon.component}
@@ -112,7 +111,6 @@ function DetailedStaticsCard({ bgColor, title, count, percentage, icon, directio
                     <ArgonBox
                       fontSize="1.125rem"
                       display="grid"
-                      placeItems="center"
                       color="inherit"
                     >
                       {icon.component}
@@ -171,7 +169,7 @@ DetailedStaticsCard.propTypes = {
     "dark",
   ]),
   title: PropTypes.string.isRequired,
-  count: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  count: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.element]),
   percentage: PropTypes.shape({
     color: PropTypes.oneOf([
       "primary",

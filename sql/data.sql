@@ -76,6 +76,12 @@ CREATE TABLE `deviceSchedule` (
     FOREIGN KEY (`dID`) REFERENCES `device`(`dID`)
 );
 
+CREATE TABLE `data` (
+	`dataID` int PRIMARY KEY AUTO_INCREMENT,
+    `value` int,
+    `time` datetime,
+    `type` varchar(255)
+);-- do something
 
 select * from `deviceSchedule`;
 
@@ -102,7 +108,7 @@ INSERT INTO `device`(`name`) VALUES ("Tarpaulin");
 INSERT INTO `device`(`name`) VALUES ("Light");
 
 INSERT INTO `deviceSchedule`(`startTime`,`endTime`,`dOfW`,`dID`) VALUES ("15:00:00", "16:00:00", "Monday", 1);
-INSERT INTO `yolobitManageDeviceSchedule` VALUES(5000, 2000);
+
 
 
 -- view data

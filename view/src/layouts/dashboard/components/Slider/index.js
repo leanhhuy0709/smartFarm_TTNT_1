@@ -118,7 +118,7 @@ function Slider() {
                 </ArgonTypography>
               </ArgonBox>
               <ArgonTypography variant="h5" color="white" mb={0.5}>
-                Get started with Argon
+                Get started with Yolo Farm
               </ArgonTypography>
               <ArgonTypography variant="body2" color="white">
                 There&apos;s nothing I really wanted to do in life that I wasn&apos;t able to get
@@ -187,11 +187,10 @@ function Slider() {
                 </ArgonTypography>
               </ArgonBox>
               <ArgonTypography variant="h5" color="white" mb={0.5}>
-                Share with us your design tips!
+                Yolo Farm
               </ArgonTypography>
               <ArgonTypography variant="body2" color="white">
-                Don&apos;t be afraid to be wrong because you can&apos;t learn anything from a
-                compliment.
+                Modern farm management system
               </ArgonTypography>
             </ArgonBox>
           </ArgonBox>

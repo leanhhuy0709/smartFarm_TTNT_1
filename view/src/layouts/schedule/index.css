@@ -19,10 +19,11 @@
 }*/
 
 .schedule-button {
-    background-color: rgb(13, 62, 129)!important;
+    background-color: rgb(38, 94, 197)!important;
+    color: rgb(255, 255, 255)!important;
     padding: 10px 20px!important;
 }
 .schedule-button:hover {
     background-color: white!important;
-    color: rgb(7, 12, 105)!important;
+    color: black!important;
 }

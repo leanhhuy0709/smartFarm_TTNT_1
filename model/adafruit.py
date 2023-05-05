@@ -9,11 +9,13 @@ from sqlQuery import *
 from key import AIO_KEY;
 
 AIO_FEED_IDS = []
-AIO_USERNAME = "vanhung4320"
-AIO_KEY = "" 
+#AIO_USERNAME = "vanhung4320"
+AIO_USERNAME = "leanhhuy"
+AIO_KEY = "aio_Gsda08OV8x6IQ6LLSMTrwSN2mUgc" 
 GROUP_NAME = 'smart-farm-ttnt'
+#GROUP_NAME = ''
 
-def  connected(client):
+def connected(client):
     print("Ket noi thanh cong...")
     
 def subscribe(client,userdata,mid,granted_qos) :
@@ -82,6 +84,6 @@ print("Adafruit python server is running!")
 while True:
     scheduleData = loadSchedule()
     addData()
-    time.sleep(60)
+    time.sleep(10)
 
     
