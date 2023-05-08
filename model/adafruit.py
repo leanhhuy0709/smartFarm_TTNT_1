@@ -22,12 +22,11 @@ def subscribe(client,userdata,mid,granted_qos) :
     print("Subscribe " + str(mid) + " thanh cong ...")
     #print("Subscribe thanh cong ...")
     
-
 def disconnected(client):
     print("Ngat ket noi ...")
     sys.exit(1)
 
-def  message(client , feed_id , payload):
+def message(client , feed_id , payload):
     now = datetime.now()
     current_time = now.strftime("%H:%M:%S %D")
     print("Nhan du lieu tu " + feed_id + ": " + payload + " at " + current_time)
@@ -75,15 +74,18 @@ def addData():
         else: print(i)
         if i["dOW"] == dOW and timeLessOrEqualThan(i["startTime"], current_time) and timeLessOrEqualThan(current_time, i["endTime"]):
             client.publish(feedsName, 1, group_id = GROUP_NAME)
-            print("Added 1 to " + feedsName)
+            #print("Added 1 to " + feedsName)
         else:
             client.publish(feedsName, 0, GROUP_NAME)
-            print("Added 0 to " + feedsName)
+            #print("Added 0 to " + feedsName)
 
 print("Adafruit python server is running!")
+
 while True:
     scheduleData = loadSchedule()
     addData()
+    #Cos gia tri ko hop le
+    #Tao 1 tin nhan trong dtb
     time.sleep(10)
 
     

@@ -37,7 +37,8 @@ function App() {
   return (
     <div>
       <button onClick={sendMessage}>Send Message</button>
-    </div>
+      <img src="https://drive.google.com/uc?id=1o2ipveXRkL3x8pTFxGC0sTKI3D_lFkbD" alt="Google Drive Image" />
+      </div>
   );
 }
 

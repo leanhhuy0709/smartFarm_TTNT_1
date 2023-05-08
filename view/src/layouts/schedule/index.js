@@ -242,7 +242,7 @@ function Schedule() {
                 <Card>
                 <Grid container spacing={3} style={{background: "inherit"}}>
                     <Grid item xs={12} style={{background: "inherit"}}>
-                    <ArgonTypography variant="h2" style={{textAlign: "center"}}>AI System</ArgonTypography>
+                    <ArgonTypography variant="h2" style={{textAlign: "center"}}>Automatic System</ArgonTypography>
                     </Grid>
 
                     <Grid item xs={10} style={{background: "inherit"}}>
@@ -291,7 +291,7 @@ function Schedule() {
                     <Grid container spacing={3} style={{background: "inherit"}}>
                         <Grid item xs={12} style={{background: "inherit"}}>
                         <ArgonTypography variant="h2" style={{textAlign: "center"}}>Temperature</ArgonTypography>
-                        <ArgonTypography variant="h3" style={{textAlign: "center", color: buttonT?'green':'red'}}>{buttonT?'ON':'OFF'}</ArgonTypography>
+                        <ArgonTypography variant="h3" style={{textAlign: "center", color: buttonT != 0?'green':'red'}}>{buttonT != 0?'ON':'OFF'}</ArgonTypography>
                         <div style={{textAlign: "center", margin: "10px"}}>
                             <Button className="schedule-button" style={{margin: "10px"}} onClick={()=>{sendMessage(topicT, "1")}}>Turn on</Button>
                             <Button className="schedule-button" style={{margin: "10px"}} onClick={()=>{sendMessage(topicT, "0")}}>Turn off</Button></div>
@@ -304,7 +304,7 @@ function Schedule() {
                     <Grid container spacing={3} style={{background: "inherit"}}>
                         <Grid item xs={12} style={{background: "inherit"}}>
                         <ArgonTypography variant="h2" style={{textAlign: "center"}}>Humidity</ArgonTypography>
-                        <ArgonTypography variant="h3" style={{textAlign: "center", color: buttonH?'green':'red'}}>{buttonH?'ON':'OFF'}</ArgonTypography>
+                        <ArgonTypography variant="h3" style={{textAlign: "center", color: buttonH != 0?'green':'red'}}>{buttonH != 0?'ON':'OFF'}</ArgonTypography>
                         <div style={{textAlign: "center", margin: "10px"}}>
                             <Button className="schedule-button" style={{margin: "10px"}} onClick={()=>{sendMessage(topicH, "1")}}>Turn on</Button>
                             <Button className="schedule-button" style={{margin: "10px"}} onClick={()=>{sendMessage(topicH, "0")}}>Turn off</Button></div>
@@ -317,7 +317,7 @@ function Schedule() {
                     <Grid container spacing={3} style={{background: "inherit"}}>
                         <Grid item xs={12} style={{background: "inherit"}}>
                         <ArgonTypography variant="h2" style={{textAlign: "center"}}>Luminance</ArgonTypography>
-                        <ArgonTypography variant="h3" style={{textAlign: "center", color: buttonL?'green':'red'}}>{buttonL?'ON':'OFF'}</ArgonTypography>
+                        <ArgonTypography variant="h3" style={{textAlign: "center", color: buttonL != 0?'green':'red'}}>{buttonL != 0?'ON':'OFF'}</ArgonTypography>
                         <div style={{textAlign: "center", margin: "10px"}}>
                             <Button className="schedule-button" style={{margin: "10px"}} onClick={()=>{sendMessage(topicL, "1")}}>Turn on</Button>
                             <Button className="schedule-button" style={{margin: "10px"}} onClick={()=>{sendMessage(topicL, "0")}}>Turn off</Button></div>
