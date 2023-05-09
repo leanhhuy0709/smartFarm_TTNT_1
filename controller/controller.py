@@ -45,7 +45,7 @@ def loginController():
 
     # Gán token vào biến temp
     temp = token
-    isAdmin = (position == "Admin")
+    isAdmin = (position == "Owner")
     return jsonify({"token": temp, "isAdmin": isAdmin})
 
 @app.route('/user', methods=['GET'])
