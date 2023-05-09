@@ -269,14 +269,14 @@ function Schedule() {
                         <ArgonTypography style={{fontSize: "16px", padding: "10px"}}><b>Auto water the tree</b></ArgonTypography>
                     </Grid>
                     <Grid item xs={2} style={{background: "inherit"}}>
-                    <Checkbox id = "water_cb" defaultChecked checked = {false} />
+                    <Checkbox id = "water_cb"/>
                     </Grid>
 
                     <Grid item xs={10} style={{background: "inherit"}}>
                         <ArgonTypography style={{fontSize: "16px", padding: "10px"}}><b>Auto open tarpaulin</b></ArgonTypography>
                     </Grid>
                     <Grid item xs={2} style={{background: "inherit"}}>
-                    <Checkbox id = "tarpaulin_cb" defaultChecked checked = {false} />
+                    <Checkbox id = "tarpaulin_cb"/>
                     </Grid>
 
                     <Grid item xs={12} style={{background: "inherit", textAlign: "center", marginBottom: "20px"}}>
