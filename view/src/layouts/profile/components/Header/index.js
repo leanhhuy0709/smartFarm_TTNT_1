@@ -70,7 +70,7 @@ function Header(data) {
         <Grid container spacing={3} alignItems="center">
           <Grid item>
             <ArgonAvatar
-              src={data.data.image}
+              src={"http://localhost:8000/" + data.data.image}
               alt="profile-image"
               variant="rounded"
               size="xl"

@@ -28,7 +28,7 @@ def getUserDataModel(userID):
         return {"userID": result[0][2], "name": result[0][6],
                     "phone": result[0][4], "email": result[0][5],
                     "position": result[0][7], "location": result[0][8],
-                    "dob": result[0][9], "image": result[0][12]}
+                    "dob": result[0][9], "image": result[0][11]}
     except:
         print("getUserDataModel Error")
 
