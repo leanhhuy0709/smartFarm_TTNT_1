@@ -7,6 +7,7 @@ import math
 import pickle
 import csv
 
+
 def entropy(labels):
     n = len(labels)
     counts = {}
@@ -95,8 +96,8 @@ def load_dt(fileName):
         f.close()
     return tree
 
-build_and_save_dt('water_pump_dt')
-build_and_save_dt('motor_dt')
-dt = load_dt('water_pump_dt.pkl')
-sample = [27, 95, 1000]
-print(predict(dt, sample))
+# build_and_save_dt('water_pump_dt')
+# build_and_save_dt('motor_dt')
+# dt = load_dt('water_pump_dt.pkl')
+# sample = [27, 95, 1000]
+# print(predict(dt, sample))
