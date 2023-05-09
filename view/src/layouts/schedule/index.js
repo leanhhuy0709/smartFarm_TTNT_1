@@ -61,6 +61,10 @@ function Schedule() {
     const topicH = 'vanhung4320/feeds/smart-farm-ttnt.water-pump';
     const topicL = 'vanhung4320/feeds/smart-farm-ttnt.led-rgb';
     const topicT = 'vanhung4320/feeds/smart-farm-ttnt.tarpaulin';
+
+    const auto1 = 'vanhung4320/feeds/smart-farm-ttnt.auto-waterpump';
+    const auto2 = 'vanhung4320/feeds/smart-farm-ttnt.auto-tarpaulin';
+
     const [buttonH, setButtonH] = useState(0);
     const [buttonL, setButtonL] = useState(0);
     const [buttonT, setButtonT] = useState(0);
@@ -118,6 +122,9 @@ function Schedule() {
         newClient.subscribe(topicH);
         newClient.subscribe(topicL);
         newClient.subscribe(topicT);
+
+        newClient.subscribe(auto1);
+        newClient.subscribe(auto2);
         
         newClient.on('message', (topic, message) => {
             console.log(`Received message from ${topic}: ${message.toString()}`);
@@ -146,6 +153,15 @@ function Schedule() {
     const sendMessage = (topic, value) => {
         client.publish(topic, value);
         console.log('Sent');
+    };
+
+    function AISystemConfirm() {
+        const t = document.getElementById("tarpaulin_cb");
+        const w = document.getElementById("water_cb");
+        if (t.checked)
+            sendMessage(auto2, "1");
+        if (w.checked)
+            sendMessage(auto1, "1");
     };
 
     
@@ -249,34 +265,18 @@ function Schedule() {
                         <ArgonTypography style={{fontSize: "16px", padding: "10px"}}><b>Auto water the tree</b></ArgonTypography>
                     </Grid>
                     <Grid item xs={2} style={{background: "inherit"}}>
-                    <Checkbox defaultChecked />
-                    </Grid>
-
-                    <Grid item xs={10} style={{background: "inherit"}}>
-                        <ArgonTypography style={{fontSize: "16px", padding: "10px"}}><b>Auto turn on the light</b></ArgonTypography>
-                    </Grid>
-                    <Grid item xs={2} style={{background: "inherit"}}>
-                    <Checkbox defaultChecked />
+                    <Checkbox id = "water_cb" defaultChecked />
                     </Grid>
 
                     <Grid item xs={10} style={{background: "inherit"}}>
                         <ArgonTypography style={{fontSize: "16px", padding: "10px"}}><b>Auto open tarpaulin</b></ArgonTypography>
                     </Grid>
                     <Grid item xs={2} style={{background: "inherit"}}>
-                    <Checkbox defaultChecked />
+                    <Checkbox id = "tarpaulin_cb" defaultChecked />
                     </Grid>
-
-                    <Grid item xs={10} style={{background: "inherit"}}>
-                        <ArgonTypography style={{fontSize: "16px", padding: "10px"}}><b>Notify when something unusual happens</b></ArgonTypography>
-                    </Grid>
-                    <Grid item xs={2} style={{background: "inherit"}}>
-                    <Checkbox defaultChecked />
-                    </Grid>
-
-
 
                     <Grid item xs={12} style={{background: "inherit", textAlign: "center", marginBottom: "20px"}}>
-                    <Button className="schedule-button">Confirm</Button>
+                    <Button className="schedule-button" onClick = {() => {AISystemConfirm()}}>Confirm</Button>
                     </Grid>
 
                 </Grid>
