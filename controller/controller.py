@@ -1,6 +1,6 @@
 from model.sqlQuery import *
 import jwt
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
@@ -101,19 +101,12 @@ def deleteDeviceScheduleController():
     if temp == {"message": False}: return jsonify(temp)
     return jsonify(temp)
 
-@app.route('/user-face-detect', methods=['GET']) 
+@app.route('/user-access', methods=['GET']) 
 def getUserAccessController():
     token = request.headers.get('token')
     userID = encodeToken(token)
     #Trả về danh sách người dùng đã đi vào (xử lý ảnh AI)
-    pass
-
-@app.route('/ai-system', methods=['POST'])
-def f():
-    body = request.get_json() 
-    #print(body['humidity'])#True or False
-    #print(body['temperature'])#True or False
-    #print(body['luminance'])#True or False
+    return json.dumps(getUserAccessModel())
 
 @app.route('/devicelist', methods=['GET'])
 def getDeviceListController():
@@ -124,3 +117,8 @@ def getDeviceListController():
 @app.route('/message', methods = ['GET'])
 def getMessageController():
     return json.dumps(getMessageModel())
+
+
+@app.route('/images/<path:filename>')
+def get_image(filename):
+    return send_from_directory("../systemAI/images", filename)

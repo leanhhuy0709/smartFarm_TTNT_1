@@ -7,11 +7,6 @@ function App() {
   const [client, setClient] = useState(null);
 
   useEffect(() => {
-    getMessage()
-    .then((res)=>{
-      console.log(res);
-    })
-    .catch((err)=>console.log(err));
     // Kết nối MQTT client đến Adafruit IO
     const options = {
       protocol: 'mqtts',
@@ -44,8 +39,10 @@ function App() {
   return (
     <div>
       <button onClick={sendMessage}>Send Message</button>
-      <img src="https://drive.google.com/uc?id=1o2ipveXRkL3x8pTFxGC0sTKI3D_lFkbD" alt="Google Drive Image" />
-      </div>
+      <form>
+
+      </form>
+    </div>
   );
 }
 

@@ -135,7 +135,18 @@ def deleteDeviceScheduleModel(data):
     return {"message": True}
 
 def getUserAccessModel():
-    pass
+    try:
+        query = """SELECT name, position, access_history.datetime, linkref
+                FROM access_history 
+                LEFT JOIN enter_farm ON access_history.datetime = enter_farm.datetime
+                LEFT JOIN user ON enter_farm.userID = user.userID
+                LEFT JOIN faceImage ON user.userID = faceImage.userID;"""
+        cursor.execute(query)
+        result = cursor.fetchall()
+        cnx.commit()
+        return list(map(lambda x: {"name": x[0], "position": x[1], "datetime": str(x[2]), "linkref": x[3]}, result))
+    except KeyError as e:
+        print(e)
 
 def getDeviceListModel():
     try:

@@ -43,11 +43,11 @@ CREATE TABLE `access_history`(
 	`datetime` DATETIME PRIMARY KEY
 );
 CREATE TABLE `enter_farm`(
-	`userid` INT,
+	`userId` INT,
     `datetime` DATETIME PRIMARY KEY,
     
     FOREIGN KEY (`datetime`) REFERENCES `access_history`(`datetime`),
-    FOREIGN KEY (`userid`) REFERENCES `user`(`userid`)
+    FOREIGN KEY (`userId`) REFERENCES `user`(`userId`)
 );
 -- DROP TABLE `yolobit`;
 CREATE TABLE `yolobit`(
@@ -107,6 +107,11 @@ INSERT INTO `employee` VALUES(2);
 INSERT INTO `message` VALUES(7000, "Humidity", "2023-05-09 13:00:59", 123);
 INSERT INTO `message`(type, datetime, value) VALUES("Temperature", "2023-05-09 13:00:59", -23);
 
+INSERT INTO `access_history` VALUES ("2023-05-09 13:00:59");
+INSERT INTO `enter_farm` VALUES (1, "2023-05-09 13:00:59");
+INSERT INTO `access_history` VALUES ("2023-05-09 14:00:59");
+INSERT INTO `enter_farm` VALUES (2, "2023-05-09 14:00:59");
+INSERT INTO `access_history` VALUES ("2023-05-09 16:00:59");
 
 INSERT INTO `yolobit` VALUES (2000);
 INSERT INTO `ownerManageYolobit` VALUES(1, 2000);
@@ -139,4 +144,4 @@ INSERT INTO `deviceSchedule`(`startTime`,`endTime`,`dOfW`,`dID`) VALUES ("15:00:
 
 -- SELECT * FROM `faceImage`;
 -- SELECT `user`.`userID` FROM `user`, `faceImage` WHERE `user`.`userID` = `faceImage`.`userID`;
-
+-- name, position, access_history.datetime
