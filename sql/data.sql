@@ -99,23 +99,23 @@ INSERT INTO `account` VALUES ("huyleanh", "012345", 1);
 INSERT INTO `faceImage` VALUES (1000, "images/anhhuy.jpg", 1);
 INSERT INTO owner VALUES(1);
 
-INSERT INTO `user` VALUES (2, "0123456789", "hoang.dohuy@hcmut.edu.vn", "Do Huy Hoang", "Employee", "Viet Nam", "2002-09-09");
-INSERT INTO `account` VALUES ("hoangdohuy", "012345", 2);
-INSERT INTO `employee` VALUES(2);
 
 INSERT INTO `user` VALUES (3, "01234561519", "my.nguyen@hcmut.edu.vn", "Nguyen Minh My", "Employee", "Thai Lan", "1992-09-09");
 INSERT INTO `account` VALUES ("mynguyenminh", "012345", 3);
 INSERT INTO `faceImage` VALUES (1002, "images/minhmy.jpg", 3);
 INSERT INTO `employee` VALUES(3);
 
-INSERT INTO `message` VALUES(7000, "Humidity", "2023-05-09 13:00:59", 123);
-INSERT INTO `message`(type, datetime, value) VALUES("Temperature", "2023-05-09 13:00:59", -23);
+INSERT INTO `user` VALUES (2, "01234561519", "hung.van4320@hcmut.edu.vn", "Ung Van Hung", "Employee", "Campodia", "2003-01-09");
+INSERT INTO `account` VALUES ("hungreo", "012345", 2);
+INSERT INTO `faceImage` VALUES (1001, "images/vanhung.jpg", 2);
+INSERT INTO `employee` VALUES(2);
 
-INSERT INTO `access_history` VALUES ("2023-05-09 13:00:59");
-INSERT INTO `enter_farm` VALUES (1, "2023-05-09 13:00:59");
-INSERT INTO `access_history` VALUES ("2023-05-09 14:00:59");
-INSERT INTO `enter_farm` VALUES (2, "2023-05-09 14:00:59");
-INSERT INTO `access_history` VALUES ("2023-05-09 16:00:59");
+-- INSERT INTO `message` VALUES(7000, "Humidity", "2023-05-09 13:00:59", 123);
+-- INSERT INTO `message`(type, datetime, value) VALUES("Temperature", "2023-05-09 13:00:59", -23);
+
+-- INSERT INTO `access_history` VALUES ("2023-05-09 13:00:59");
+-- INSERT INTO `enter_farm` VALUES (1, "2023-05-09 13:00:59");
+-- INSERT INTO `access_history` VALUES ("2023-05-09 16:00:59");
 
 INSERT INTO `yolobit` VALUES (2000);
 INSERT INTO `ownerManageYolobit` VALUES(1, 2000);

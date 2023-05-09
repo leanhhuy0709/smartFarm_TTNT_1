@@ -31,9 +31,9 @@ function Default() {
     const [mqttH, setMqttH] = useState(null);
     const [mqttL, setMqttL] = useState(null);
     const [mqttT, setMqttT] = useState(null);
-    const topicH = 'leanhhuy/feeds/humidity';
-    const topicL = 'leanhhuy/feeds/luminance';
-    const topicT = 'leanhhuy/feeds/temperature';
+    const topicH = 'vanhung4320/feeds/smart-farm-ttnt.humidity';
+    const topicL = 'vanhung4320/feeds/smart-farm-ttnt.luminance';
+    const topicT = 'vanhung4320/feeds/smart-farm-ttnt.temperature';
 
     const [rawHData, setRawHData] = useState(null);
     const [rawTData, setRawTData] = useState(null);
@@ -95,8 +95,8 @@ function Default() {
         // Kết nối MQTT client đến Adafruit IO
         const options = {
           protocol: 'mqtts',
-          username: 'leanhhuy',
-          password: 'aio_Gsda08OV8x6IQ6LLSMTrwSN2mUgc'
+          username: 'vanhung4320',
+          password: 'aio_CLTY71yuD7jMEOr1zZMsHssfE29H'
         };
         const newClient = mqtt.connect('mqtts://io.adafruit.com', options);
     
@@ -178,9 +178,9 @@ function Default() {
             <Grid item xs={12} md={6} lg={3}>
                 <DetailedStatisticsCard
                 title="Recent luminance"
-                count={mqttL ? `${mqttL} nm` : (lData.datasets[0].data.length > 0 ?`${round2Dec(lData.datasets[0].data[lData.datasets[0].data.length - 1])} nm`: '')}
+                count={mqttL ? `${mqttL} lux` : (lData.datasets[0].data.length > 0 ?`${round2Dec(lData.datasets[0].data[lData.datasets[0].data.length - 1])} lux`: '')}
                 icon={{ color: "success", component: <i className="fa fa-lightbulb-o" /> }}
-                percentage={{ color: `${lData.datasets[0].data[lData.datasets[0].data.length - 1] - lData.datasets[0].data[lData.datasets[0].data.length - 2] >= 0 ? "success":"error"}`, count:`${lData.datasets[0].data[lData.datasets[0].data.length - 1] - lData.datasets[0].data[lData.datasets[0].data.length - 2] > 0 ? '+':''}${round2Dec(lData.datasets[0].data[lData.datasets[0].data.length - 1] - lData.datasets[0].data[lData.datasets[0].data.length - 2])} nm`, text: "since one hour" }}
+                percentage={{ color: `${lData.datasets[0].data[lData.datasets[0].data.length - 1] - lData.datasets[0].data[lData.datasets[0].data.length - 2] >= 0 ? "success":"error"}`, count:`${lData.datasets[0].data[lData.datasets[0].data.length - 1] - lData.datasets[0].data[lData.datasets[0].data.length - 2] > 0 ? '+':''}${round2Dec(lData.datasets[0].data[lData.datasets[0].data.length - 1] - lData.datasets[0].data[lData.datasets[0].data.length - 2])} lux`, text: "since one hour" }}
                 />
             </Grid>
             

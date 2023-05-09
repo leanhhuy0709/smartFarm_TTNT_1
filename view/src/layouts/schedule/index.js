@@ -58,9 +58,9 @@ function Schedule() {
     const [devices, setDevices] = useState(null)
 
     const [client, setClient] = useState(null);
-    const topicH = 'leanhhuy/feeds/humidity';
-    const topicL = 'leanhhuy/feeds/luminance';
-    const topicT = 'leanhhuy/feeds/temperature';
+    const topicH = 'vanhung4320/feeds/smart-farm-ttnt.water-pump';
+    const topicL = 'vanhung4320/feeds/smart-farm-ttnt.led-rgb';
+    const topicT = 'vanhung4320/feeds/smart-farm-ttnt.tarpaulin';
     const [buttonH, setButtonH] = useState(0);
     const [buttonL, setButtonL] = useState(0);
     const [buttonT, setButtonT] = useState(0);
@@ -110,8 +110,8 @@ function Schedule() {
         // Kết nối MQTT client đến Adafruit IO
         const options = {
             protocol: 'mqtts',
-            username: 'leanhhuy',
-            password: 'aio_Gsda08OV8x6IQ6LLSMTrwSN2mUgc'
+            username: 'vanhung4320',
+            password: 'aio_CLTY71yuD7jMEOr1zZMsHssfE29H'
         };
         const newClient = mqtt.connect('mqtts://io.adafruit.com', options);
     
@@ -290,7 +290,7 @@ function Schedule() {
                 <Card>
                     <Grid container spacing={3} style={{background: "inherit"}}>
                         <Grid item xs={12} style={{background: "inherit"}}>
-                        <ArgonTypography variant="h2" style={{textAlign: "center"}}>Temperature</ArgonTypography>
+                        <ArgonTypography variant="h2" style={{textAlign: "center"}}>Tarpaulin</ArgonTypography>
                         <ArgonTypography variant="h3" style={{textAlign: "center", color: buttonT != 0?'green':'red'}}>{buttonT != 0?'ON':'OFF'}</ArgonTypography>
                         <div style={{textAlign: "center", margin: "10px"}}>
                             <Button className="schedule-button" style={{margin: "10px"}} onClick={()=>{sendMessage(topicT, "1")}}>Turn on</Button>
@@ -303,7 +303,7 @@ function Schedule() {
                 <Card>
                     <Grid container spacing={3} style={{background: "inherit"}}>
                         <Grid item xs={12} style={{background: "inherit"}}>
-                        <ArgonTypography variant="h2" style={{textAlign: "center"}}>Humidity</ArgonTypography>
+                        <ArgonTypography variant="h2" style={{textAlign: "center"}}>Water Pump</ArgonTypography>
                         <ArgonTypography variant="h3" style={{textAlign: "center", color: buttonH != 0?'green':'red'}}>{buttonH != 0?'ON':'OFF'}</ArgonTypography>
                         <div style={{textAlign: "center", margin: "10px"}}>
                             <Button className="schedule-button" style={{margin: "10px"}} onClick={()=>{sendMessage(topicH, "1")}}>Turn on</Button>
@@ -316,7 +316,7 @@ function Schedule() {
                 <Card>
                     <Grid container spacing={3} style={{background: "inherit"}}>
                         <Grid item xs={12} style={{background: "inherit"}}>
-                        <ArgonTypography variant="h2" style={{textAlign: "center"}}>Luminance</ArgonTypography>
+                        <ArgonTypography variant="h2" style={{textAlign: "center"}}>LED RGB</ArgonTypography>
                         <ArgonTypography variant="h3" style={{textAlign: "center", color: buttonL != 0?'green':'red'}}>{buttonL != 0?'ON':'OFF'}</ArgonTypography>
                         <div style={{textAlign: "center", margin: "10px"}}>
                             <Button className="schedule-button" style={{margin: "10px"}} onClick={()=>{sendMessage(topicL, "1")}}>Turn on</Button>

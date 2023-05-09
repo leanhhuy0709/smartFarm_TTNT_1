@@ -8,8 +8,8 @@ from sqlQuery import *
 
 AIO_FEED_IDS = []
 #AIO_USERNAME = "vanhung4320"
-AIO_USERNAME = "leanhhuy"
-AIO_KEY = "aio_Gsda08OV8x6IQ6LLSMTrwSN2mUgc" 
+AIO_USERNAME = "vanhung4320"
+AIO_KEY = "aio_CLTY71yuD7jMEOr1zZMsHssfE29H" 
 GROUP_NAME = 'smart-farm-ttnt'
 #GROUP_NAME = ''
 
@@ -29,13 +29,13 @@ def message(client , feed_id , payload):
     current_time = now.strftime("%Y-%m-%d %H:%M:%S")
     print("Nhan du lieu tu " + feed_id + ": " + payload + " at " + current_time)
     payload = int(payload)
-    if feed_id == "humidity": 
+    if feed_id == "smart-farm-ttnt.humidity": 
         if payload > 90 or payload < 10:
             addMessageModel(feed_id, current_time, payload)
-    elif feed_id == "temperature": 
+    elif feed_id == "smart-farm-ttnt.temperature": 
         if payload > 30 or payload < 10:
             addMessageModel(feed_id, current_time, payload)
-    elif feed_id == "luminance": 
+    elif feed_id == "smart-farm-ttnt.luminance": 
         if payload > 200 or payload < 100:
             addMessageModel(feed_id, current_time, payload)
     
@@ -89,9 +89,9 @@ def addData():
 
 print("Adafruit python server is running!")
 
-client.subscribe('temperature')
-client.subscribe('humidity')
-client.subscribe('luminance')
+client.subscribe('smart-farm-ttnt.temperature')
+client.subscribe('smart-farm-ttnt.humidity')
+client.subscribe('smart-farm-ttnt.luminance')
 
 while True:
     scheduleData = loadSchedule()

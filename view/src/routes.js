@@ -72,16 +72,16 @@ var routes = [
     key: "sign-up",
     route: "/authentication/sign-up",
     icon: <ArgonBox component="i" color="info" fontSize="14px" className="ni ni-collection" />,
-    component: <SignUp />,
-  },
-  {
-    type: "route",
-    name: "Debug",
-    key: "debug",
-    route: "/debug",
-    icon: <ArgonBox component="i" color="info" fontSize="14px" className="ni ni-collection" />,
-    component: <Debug />,
-  }
+    component: <SignUp />,}
+  // },
+  // {
+  //   type: "route",
+  //   name: "Debug",
+  //   key: "debug",
+  //   route: "/debug",
+  //   icon: <ArgonBox component="i" color="info" fontSize="14px" className="ni ni-collection" />,
+  //   component: <Debug />,
+  // }
 ];
 
 export default routes;

@@ -8,12 +8,12 @@ const apiTemperature = 'https://io.adafruit.com/api/v2/vanhung4320/feeds/smart-f
 const apiLuminance = 'https://io.adafruit.com/api/v2/vanhung4320/feeds/smart-farm-ttnt.luminance/data?key=';
 */
 
-const apiHumidity = 'https://io.adafruit.com/api/v2/leanhhuy/feeds/humidity/data?key=';
-const apiTemperature = 'https://io.adafruit.com/api/v2/leanhhuy/feeds/temperature/data?key=';
-const apiLuminance = 'https://io.adafruit.com/api/v2/leanhhuy/feeds/luminance/data?key=';
-const apiBtnH = 'https://io.adafruit.com/api/v2/leanhhuy/feeds/humidity';
-const apiBtnT = 'https://io.adafruit.com/api/v2/leanhhuy/feeds/temperature';
-const apiBtnL = 'https://io.adafruit.com/api/v2/leanhhuy/feeds/luminance';
+const apiHumidity = 'https://io.adafruit.com/api/v2/vanhung4320/feeds/smart-farm-ttnt.humidity/data?key=';
+const apiTemperature = 'https://io.adafruit.com/api/v2/vanhung4320/feeds/smart-farm-ttnt.temperature/data?key=';
+const apiLuminance = 'https://io.adafruit.com/api/v2/vanhung4320/feeds/smart-farm-ttnt.luminance/data?key=';
+const apiBtnWaterPump = 'https://io.adafruit.com/api/v2/vanhung4320/feeds/smart-farm-ttnt.water-pump';
+const apiBtnTarpaulin = 'https://io.adafruit.com/api/v2/vanhung4320/feeds/smart-farm-ttnt.tarpaulin';
+const apiBtnLed_RGB = 'https://io.adafruit.com/api/v2/vanhung4320/feeds/smart-farm-ttnt.led-rgb';
 
 const apiSignIn = '/login';
 const apiSignUp = '/signup';
@@ -26,7 +26,7 @@ const apiDelSchedule = '/del-schedule';
 const apiMessage = '/message';
 const apiUserAccess = '/user-access';
 
-const key = "aio_Gsda08OV8x6IQ6LLSMTrwSN2mUgc";//Key của Hưng!!! Không để ở đây được vì nó sẽ đổi key nếu up lên github
+const key = "aio_CLTY71yuD7jMEOr1zZMsHssfE29H";//Key của Hưng!!! Không để ở đây được vì nó sẽ đổi key nếu up lên github
 
 export const getHumidityData = async () => {
     //const result = await axios.get(host + apiHumidity);    
@@ -118,19 +118,19 @@ export const putDelSchedule = async (data) =>
 
 export const getButtonHumidity = async () => 
 {
-    const result = await axios.get(apiBtnH);
+    const result = await axios.get(apiBtnWaterPump);
     return result.data.last_value;
 }
 
 export const getButtonTemperature = async () => 
 {
-    const result = await axios.get(apiBtnT);
+    const result = await axios.get(apiBtnTarpaulin);
     return result.data.last_value;
 }
 
 export const getButtonLuminance = async () => 
 {
-    const result = await axios.get(apiBtnL);
+    const result = await axios.get(apiBtnLed_RGB);
     return result.data.last_value;
 }
 
