@@ -48,7 +48,7 @@ def signUpModel(data):
     try:
         query = """INSERT INTO user (name, email, phoneNumber, location, dob, position)
         values(%s, %s, %s, %s, %s, %s);"""
-        cursor.execute(query, (data['name'], data['email'], data['phone'], data['location'], str(data['dob']), "Staff"))
+        cursor.execute(query, (data['name'], data['email'], data['phone'], data['location'], str(data['dob']), "Employee"))
         cnx.commit()
     except Exception as e:
         print("Error: ", e)
@@ -56,9 +56,8 @@ def signUpModel(data):
     
     # add to faceImage table
     try:
-        query = """INSERT INTO faceImage (label, linkref, userID)
-        values(%s, %s, (SELECT MAX(userID) from user));"""
-        cursor.execute(query, (data['name'], data['image']))
+        query = "INSERT INTO faceImage (linkref, userID) values('" + str(data["image"])+ "', (SELECT MAX(userID) from user));"
+        cursor.execute(query)
         cnx.commit()
     except Exception as e:
         print("Error: ", e)
@@ -71,6 +70,14 @@ def signUpModel(data):
         cursor.execute(query, (data['username'], data['password']))
         cnx.commit()
     except:
+        return {"message": False}
+    
+    try:
+        query = "INSERT INTO employee values((SELECT MAX(userID) from user));"
+        cursor.execute(query)
+        cnx.commit()
+    except Exception as e:
+        print("Error: ", e)
         return {"message": False}
     
     return {"message": True}
