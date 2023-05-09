@@ -147,8 +147,8 @@ while True:
 
         # Load model to predict
         cls_wp = load_dt('../systemAI/water_pump_dt.pkl')
-        value = predict(cls_wp, [int(value_temp), int(value_humi), int(value_lumi)])
-        print(value)
+        value = predict(cls_wp, [float(value_temp), float(value_humi), float(value_lumi)])
+        # print(value)
         client.publish("water-pump", value, GROUP_NAME)
 
     if auto_tarpaulin:
@@ -167,7 +167,7 @@ while True:
 
         # Load model to predict
         cls_motor = load_dt('../systemAI/motor_dt.pkl')
-        value = predict(cls_motor, [int(value_temp), int(value_humi), int(value_lumi)])
+        value = predict(cls_motor, [float(value_temp), float(value_humi), float(value_lumi)])
 
         client.publish("tarpaulin", value, GROUP_NAME)
 
