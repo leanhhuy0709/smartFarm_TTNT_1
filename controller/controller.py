@@ -81,18 +81,18 @@ def getDeviceScheduleController():
     userID = encodeToken(token)
     return jsonify(getDeviceScheduleModel())
 
-@app.route('/add-schedule', methods=['PUT', 'OPTIONS']) 
+@app.route('/add-schedule', methods=['POST']) 
 def addDeviceScheduleController():
     #data = ["humidity", "17/03/2022", "07:00", "09:00"]
+    
     token = request.headers.get('token')
     userID = encodeToken(token)
     body = request.get_json()
     temp = addDeviceScheduleModel(body["data"])
-    
     if temp == {"message": False}: return jsonify(temp)
     return jsonify(temp)
 
-@app.route('/del-schedule', methods=['PUT', 'OPTIONS']) 
+@app.route('/del-schedule', methods=['POST']) 
 def deleteDeviceScheduleController():
     token = request.headers.get('token')
     userID = encodeToken(token)

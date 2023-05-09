@@ -102,6 +102,11 @@ function Schedule() {
         .then((res)=>setButtonL(res))
         .catch((err)=>console.log(err));
 
+        const t = document.getElementById("tarpaulin_cb");
+        const w = document.getElementById("water_cb");
+        t.checked = false;
+        w.checked = false;
+
     /*
         let res = [{"dID": 4000, "dSID": 5000, "dOW": "Monday", "startTime": "15:00", "endTime": "16:00", "name": "Water Pump"},
         {"dID": 4001, "dSID": 5001, "dOW": "Tuesday", "startTime": "13:00", "endTime": "14:00", "name": "Water Pump"},

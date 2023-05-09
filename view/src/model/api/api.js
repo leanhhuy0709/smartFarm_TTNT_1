@@ -98,7 +98,7 @@ export const getDeviceListData = async () =>
 
 export const putAddSchedule = async (data) =>
 {
-    const result = await axios.put(host + apiAddSchedule, {
+    const result = await axios.post(host + apiAddSchedule, {
         headers: {
             'token': localStorage.getItem("token")
           },
@@ -108,7 +108,7 @@ export const putAddSchedule = async (data) =>
 
 export const putDelSchedule = async (data) =>
 {
-    const result = await axios.put(host + apiDelSchedule, {
+    const result = await axios.post(host + apiDelSchedule, {
         headers: {
             'token': localStorage.getItem("token")
           },
