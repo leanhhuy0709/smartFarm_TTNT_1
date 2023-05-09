@@ -34,7 +34,7 @@ def getUserDataModel(userID):
 
 def signUpModel(data):
     # {'name': 'hoang', 'email': 'hoang@gmail.com', 'phone': '0987654321', 'location': 'hcm', 'dob': '2000-01-01', 'image': 'a', 'username': 'hoang', 'password': '1234'}
-    
+    print("Signup")
     # check if username exist
     try:
         query = """SELECT EXISTS(SELECT * FROM account WHERE username = \"""" + str(data['username']) + """\")"""
@@ -48,10 +48,10 @@ def signUpModel(data):
     try:
         query = """INSERT INTO user (name, email, phoneNumber, location, dob, position)
         values(%s, %s, %s, %s, %s, %s);"""
-        cursor.execute(query, (data['name'], data['email'], data['phone'], data['location'], data['dob'], "Staff"))
+        cursor.execute(query, (data['name'], data['email'], data['phone'], data['location'], str(data['dob']), "Staff"))
         cnx.commit()
-        result = cursor.fetchall()
-    except:
+    except Exception as e:
+        print("Error: ", e)
         return {"message": False}
     
     # add to faceImage table
@@ -60,8 +60,8 @@ def signUpModel(data):
         values(%s, %s, (SELECT MAX(userID) from user));"""
         cursor.execute(query, (data['name'], data['image']))
         cnx.commit()
-        result = cursor.fetchall()
-    except:
+    except Exception as e:
+        print("Error: ", e)
         return {"message": False}
 
     # add to account table
@@ -70,7 +70,6 @@ def signUpModel(data):
         values(%s, %s, (SELECT MAX(userID) from user));"""
         cursor.execute(query, (data['username'], data['password']))
         cnx.commit()
-        result = cursor.fetchall()
     except:
         return {"message": False}
     
@@ -113,8 +112,8 @@ def getDeviceScheduleModel():
             }, result))
         cnx.commit()
         return result
-    except:
-        print("getDeviceScheduleModel Error!")
+    except Exception as e:
+        print("Đã xảy ra lỗi:", e)
 
 def addDeviceScheduleModel(data):
     try:

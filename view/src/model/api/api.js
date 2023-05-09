@@ -76,7 +76,7 @@ export const getUserListData = async () =>
 
 export const getScheduleData = async () =>
 {
-    const result = await axios.get(host + apiScheduleInfo,{
+    const result = await axios.post(host + apiScheduleInfo,{
         headers: {
           'token': localStorage.getItem("token")
         }

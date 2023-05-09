@@ -68,20 +68,20 @@ def signUpController():
     
     
 
-@app.route('/userlist') 
+@app.route('/userlist', methods = ['GET']) 
 def getUserListController():
     #Kiểm tra userID có phải người dùng hay không?
     token = request.headers.get('token')
     userID = encodeToken(token)
     return jsonify(getUserListDataModel())
 
-@app.route('/schedule') 
+@app.route('/schedule', methods = ['POST']) 
 def getDeviceScheduleController():
     token = request.headers.get('token')
     userID = encodeToken(token)
     return jsonify(getDeviceScheduleModel())
 
-@app.route('/add-schedule', methods=['PUT']) 
+@app.route('/add-schedule', methods=['PUT', 'OPTIONS']) 
 def addDeviceScheduleController():
     #data = ["humidity", "17/03/2022", "07:00", "09:00"]
     token = request.headers.get('token')
@@ -92,7 +92,7 @@ def addDeviceScheduleController():
     if temp == {"message": False}: return jsonify(temp)
     return jsonify(temp)
 
-@app.route('/del-schedule', methods=['PUT']) 
+@app.route('/del-schedule', methods=['PUT', 'OPTIONS']) 
 def deleteDeviceScheduleController():
     token = request.headers.get('token')
     userID = encodeToken(token)
@@ -115,10 +115,8 @@ def f():
     #print(body['temperature'])#True or False
     #print(body['luminance'])#True or False
 
-@app.route('/devicelist', methods=['GET', 'OPTIONS'])
+@app.route('/devicelist', methods=['GET'])
 def getDeviceListController():
     token = request.headers.get('Authorization')
     userID = encodeToken(token)
     return json.dumps(getDeviceListModel())
-
-    

@@ -83,7 +83,7 @@ CREATE TABLE `data` (
     `type` varchar(255)
 );-- do something
 
-select * from `deviceSchedule`;
+-- select * from `deviceSchedule`;
 
 -- insert data
 INSERT INTO `user` VALUES (1, "0123456789", "huy.leanh0709@hcmut.edu.vn", "Le Anh Huy", "Admin", "Viet Nam", "2002-09-07");
@@ -117,14 +117,15 @@ INSERT INTO `deviceSchedule`(`startTime`,`endTime`,`dOfW`,`dID`) VALUES ("15:00:
 -- select * from user;
 -- select * from faceImage;
 -- select * from sensor;
-SELECT * FROM (account join user on account.userID = user.userID) left join faceImage on user.userID = faceImage.userID;
+-- SELECT * FROM (account join user on account.userID = user.userID) left join faceImage on user.userID = faceImage.userID;
 -- SELECT account.userID, position FROM account join user on account.userID = user.userID where username='huyleanh' and password='012345';
 
-select * from user;
+-- select * from user;
 -- SELECT * FROM deviceSchedule join device on deviceSchedule.dID = device.dID;
-SELECT user.userID, email, name, position, location, DOB, linkref, phoneNumber FROM (account join user on account.userID = user.userID) left join faceImage on user.userID = faceImage.userID;
+-- SELECT user.userID, email, name, position, location, DOB, linkref, phoneNumber FROM (account join user on account.userID = user.userID) left join faceImage on user.userID = faceImage.userID;
 
 
-select * from device;
+-- select * from device;
 
-select * from deviceSchedule;
+-- select * from deviceSchedule;
+select * from `faceImage`

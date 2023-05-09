@@ -38,6 +38,7 @@ function Cover() {
         alert("Username already exists!")
         return;
       }
+      alert("Signup sucessful!");
       window.location.pathname = "/authentication/sign-in";
     })
     .catch((err)=>console.log(err))

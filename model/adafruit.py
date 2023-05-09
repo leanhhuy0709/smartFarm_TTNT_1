@@ -6,8 +6,6 @@ import random
 
 from sqlQuery import *
 
-from key import AIO_KEY;
-
 AIO_FEED_IDS = []
 #AIO_USERNAME = "vanhung4320"
 AIO_USERNAME = "leanhhuy"
@@ -86,6 +84,6 @@ while True:
     addData()
     #Cos gia tri ko hop le
     #Tao 1 tin nhan trong dtb
-    time.sleep(10)
+    time.sleep(10 * 60) #10 phut kiem tra 1 lan
 
     
