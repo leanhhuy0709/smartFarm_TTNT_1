@@ -160,8 +160,12 @@ function Schedule() {
         const w = document.getElementById("water_cb");
         if (t.checked)
             sendMessage(auto2, "1");
+        else 
+            sendMessage(auto2, "0");
         if (w.checked)
             sendMessage(auto1, "1");
+        else 
+            sendMessage(auto1, "0");
     };
 
     
