@@ -76,8 +76,8 @@ def predict(tree, sample):
         # Traverse the right subtree if the sample's feature value is greater than or equal to the threshold
         return predict(tree['right_subtree'], sample)
 
-def build_and_save_dt(fileName):
-    with open(fileName + '.csv', 'r') as f:
+def build_and_save_dt(fileNameWithoutExt):
+    with open(fileNameWithoutExt + '.csv', 'r') as f:
         data = list(csv.reader(f, delimiter=','))
         f.close()
     X1, y1 = [], []
@@ -85,10 +85,18 @@ def build_and_save_dt(fileName):
         X1 += [[int(i) for i in ele[:-1]]]
         y1 += [int(ele[-1])]
     tree1 = build_tree(X1, y1)
-    water_pump_dt_path = fileName + '.pkl'
+    water_pump_dt_path = fileNameWithoutExt + '.pkl'
     with open(water_pump_dt_path, 'wb') as f:
         pickle.dump(tree1, f)
         f.close()
+def load_dt(fileName):
+    with open(fileName, 'rb') as f:
+        tree = pickle.load(f)
+        f.close()
+    return tree
 
 build_and_save_dt('water_pump_dt')
 build_and_save_dt('motor_dt')
+dt = load_dt('water_pump_dt.pkl')
+sample = [27, 95, 1000]
+print(predict(dt, sample))
