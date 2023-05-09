@@ -6,7 +6,6 @@ import random
 
 from sqlQuery import *
 
-from key import AIO_KEY;
 
 AIO_FEED_IDS = []
 #AIO_USERNAME = "vanhung4320"

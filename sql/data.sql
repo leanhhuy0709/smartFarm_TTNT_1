@@ -101,7 +101,7 @@ CREATE TABLE `data` (
 select * from `deviceSchedule`;
 
 -- insert data
-INSERT INTO `user` VALUES (1, "0123456789", "huy.leanh0709@hcmut.edu.vn", "Le Anh Huy", "owner", "Viet Nam", "2002-09-07");
+INSERT INTO `user` VALUES (1, "0123456789", "huy.leanh0709@hcmut.edu.vn", "Le Anh Huy", "Owner", "Viet Nam", "2002-09-07");
 INSERT INTO `account` VALUES ("huyleanh", "012345", 1);
 INSERT INTO `faceImage` VALUES (1000, "images/anhhuy.jpg", 1);
 INSERT INTO owner VALUES(1);

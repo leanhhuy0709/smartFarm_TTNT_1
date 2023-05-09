@@ -1,6 +1,6 @@
 from model.sqlQuery import *
 import jwt
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
@@ -68,20 +68,20 @@ def signUpController():
     
     
 
-@app.route('/userlist') 
+@app.route('/userlist', methods = ['GET']) 
 def getUserListController():
     #Kiểm tra userID có phải người dùng hay không?
     token = request.headers.get('token')
     userID = encodeToken(token)
     return jsonify(getUserListDataModel())
 
-@app.route('/schedule') 
+@app.route('/schedule', methods = ['POST']) 
 def getDeviceScheduleController():
     token = request.headers.get('token')
     userID = encodeToken(token)
     return jsonify(getDeviceScheduleModel())
 
-@app.route('/add-schedule', methods=['PUT']) 
+@app.route('/add-schedule', methods=['PUT', 'OPTIONS']) 
 def addDeviceScheduleController():
     #data = ["humidity", "17/03/2022", "07:00", "09:00"]
     token = request.headers.get('token')
@@ -92,7 +92,7 @@ def addDeviceScheduleController():
     if temp == {"message": False}: return jsonify(temp)
     return jsonify(temp)
 
-@app.route('/del-schedule', methods=['PUT']) 
+@app.route('/del-schedule', methods=['PUT', 'OPTIONS']) 
 def deleteDeviceScheduleController():
     token = request.headers.get('token')
     userID = encodeToken(token)
@@ -101,24 +101,24 @@ def deleteDeviceScheduleController():
     if temp == {"message": False}: return jsonify(temp)
     return jsonify(temp)
 
-@app.route('/user-face-detect', methods=['GET']) 
+@app.route('/user-access', methods=['GET']) 
 def getUserAccessController():
     token = request.headers.get('token')
     userID = encodeToken(token)
     #Trả về danh sách người dùng đã đi vào (xử lý ảnh AI)
-    pass
+    return json.dumps(getUserAccessModel())
 
-@app.route('/ai-system', methods=['POST'])
-def f():
-    body = request.get_json() 
-    #print(body['humidity'])#True or False
-    #print(body['temperature'])#True or False
-    #print(body['luminance'])#True or False
-
-@app.route('/devicelist', methods=['GET', 'OPTIONS'])
+@app.route('/devicelist', methods=['GET'])
 def getDeviceListController():
     token = request.headers.get('Authorization')
     userID = encodeToken(token)
     return json.dumps(getDeviceListModel())
 
-    
+@app.route('/message', methods = ['GET'])
+def getMessageController():
+    return json.dumps(getMessageModel())
+
+
+@app.route('/images/<path:filename>')
+def get_image(filename):
+    return send_from_directory("../systemAI/images", filename)
