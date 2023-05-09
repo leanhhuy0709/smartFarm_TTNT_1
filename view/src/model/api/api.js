@@ -23,6 +23,8 @@ const apiScheduleInfo = '/schedule';
 const apiDeviceList = '/devicelist';
 const apiAddSchedule = '/add-schedule';
 const apiDelSchedule = '/del-schedule';
+const apiMessage = '/message';
+const apiUserAccess = '/user-access';
 
 const key = "aio_Gsda08OV8x6IQ6LLSMTrwSN2mUgc";//Key của Hưng!!! Không để ở đây được vì nó sẽ đổi key nếu up lên github
 
@@ -76,7 +78,7 @@ export const getUserListData = async () =>
 
 export const getScheduleData = async () =>
 {
-    const result = await axios.get(host + apiScheduleInfo,{
+    const result = await axios.post(host + apiScheduleInfo,{
         headers: {
           'token': localStorage.getItem("token")
         }
@@ -132,3 +134,14 @@ export const getButtonLuminance = async () =>
     return result.data.last_value;
 }
 
+export const getMessage = async () => 
+{
+    const result = await axios.get(host + apiMessage);
+    return result.data;
+}
+
+export const getUserAccess = async () => 
+{
+    const result = await axios.get(host + apiUserAccess);
+    return result.data;
+}

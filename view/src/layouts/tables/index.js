@@ -40,7 +40,7 @@ function Tables() {
         console.log(res);
         setRows(res.map((idx)=> {
             return {
-            user: <Author image={idx.image} name={idx.name} email={idx.email} />,
+            user: <Author image={idx.image ? "http://localhost:8000/" + idx.image : team2} name={idx.name} email={idx.email} />,
             position: <Function job={idx.position} org="" />,
             phone: (
                 <ArgonTypography variant="caption" color="secondary" fontWeight="medium">

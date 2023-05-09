@@ -20,45 +20,32 @@ import team2 from "assets/images/team-2.jpg";
 import team3 from "assets/images/team-3.jpg";
 import team4 from "assets/images/team-4.jpg";
 
+import { getUserAccess } from "model/api/api";
+
 
 function Tables() {
   //const { columns, rows } = authorsTableData;
   var columns = [
-    { name: "user", align: "left", key2: "user" },
-    { name: "function", align: "left", key2: "function" },
-    { name: "status", align: "center", key2: "status"},
-    { name: "employed", align: "center", key2: "employed" },
-    { name: "action", align: "center", key2: "action" },
+    { name: "user", align: "left"},
+    { name: "position", align: "left"},
+    { name: "datetime", align: "center" }
   ];
   const [rows, setRows] = useState(null);
   
   useEffect(()=>{
-    getUserListData()
+    getUserAccess()
     .then((res)=>{
-      console.log(res[0]);
+      res = res.reverse();
+      res = res.slice(0, 10);
       setRows(res.map((idx)=> {
         return {
-          user: <Author image={team2} name={idx[7]} email={idx[6]} />,
-          function: <Function job="Staff" org="" />,
-          status: (
-            <ArgonBadge variant="gradient" badgeContent="offline" color="secondary" size="xs" container />
-          ),
-          employed: (
+          user: <Author image={idx.linkref ? "http://localhost:8000/" + idx.linkref : team2} name={idx.name ? idx.name : "Anonymous"} />,
+          position: <Function job={idx.position ? idx.position : "Anonymous"} org="" />,
+          datetime: (
             <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
-              15/03/23
+              {idx.datetime}
             </ArgonTypography>
-          ),
-          action: (
-            <ArgonTypography
-              component="a"
-              href="#"
-              variant="caption"
-              color="secondary"
-              fontWeight="medium"
-            >
-              Edit
-            </ArgonTypography>
-          ),
+          )
         }
       }))
     })

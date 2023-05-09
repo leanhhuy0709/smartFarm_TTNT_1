@@ -43,11 +43,11 @@ CREATE TABLE `access_history`(
 	`datetime` DATETIME PRIMARY KEY
 );
 CREATE TABLE `enter_farm`(
-	`userid` INT,
+	`userId` INT,
     `datetime` DATETIME PRIMARY KEY,
     
     FOREIGN KEY (`datetime`) REFERENCES `access_history`(`datetime`),
-    FOREIGN KEY (`userid`) REFERENCES `user`(`userid`)
+    FOREIGN KEY (`userId`) REFERENCES `user`(`userId`)
 );
 -- DROP TABLE `yolobit`;
 CREATE TABLE `yolobit`(
@@ -91,14 +91,7 @@ CREATE TABLE `deviceSchedule` (
     FOREIGN KEY (`dID`) REFERENCES `device`(`dID`)
 );
 
-CREATE TABLE `data` (
-	`dataID` int PRIMARY KEY AUTO_INCREMENT,
-    `value` int,
-    `time` datetime,
-    `type` varchar(255)
-);-- do something
-
-select * from `deviceSchedule`;
+-- select * from `deviceSchedule`;
 
 -- insert data
 INSERT INTO `user` VALUES (1, "0123456789", "huy.leanh0709@hcmut.edu.vn", "Le Anh Huy", "Owner", "Viet Nam", "2002-09-07");
@@ -111,8 +104,14 @@ INSERT INTO `account` VALUES ("hoangdohuy", "012345", 2);
 INSERT INTO `employee` VALUES(2);
 
 
+INSERT INTO `message` VALUES(7000, "Humidity", "2023-05-09 13:00:59", 123);
+INSERT INTO `message`(type, datetime, value) VALUES("Temperature", "2023-05-09 13:00:59", -23);
 
-
+INSERT INTO `access_history` VALUES ("2023-05-09 13:00:59");
+INSERT INTO `enter_farm` VALUES (1, "2023-05-09 13:00:59");
+INSERT INTO `access_history` VALUES ("2023-05-09 14:00:59");
+INSERT INTO `enter_farm` VALUES (2, "2023-05-09 14:00:59");
+INSERT INTO `access_history` VALUES ("2023-05-09 16:00:59");
 
 INSERT INTO `yolobit` VALUES (2000);
 INSERT INTO `ownerManageYolobit` VALUES(1, 2000);
@@ -124,7 +123,7 @@ INSERT INTO `device`(`name`) VALUES ("Light");
 
 INSERT INTO `deviceSchedule`(`startTime`,`endTime`,`dOfW`,`dID`) VALUES ("15:00:00", "16:00:00", "Monday", 1);
 
-
+-- select * from message;
 
 -- view data
 -- SELECT * from `user` join `account` on `user`.`userID` = `account`.`userID`;
@@ -133,15 +132,16 @@ INSERT INTO `deviceSchedule`(`startTime`,`endTime`,`dOfW`,`dID`) VALUES ("15:00:
 -- select * from faceImage;
 -- select * from sensor;
 -- SELECT * FROM (account join user on account.userID = user.userID) left join faceImage on user.userID = faceImage.userID;
+
 -- -- SELECT account.userID, position FROM account join user on account.userID = user.userID where username='huyleanh' and password='012345';
 
 -- select * from user;
 -- -- SELECT * FROM deviceSchedule join device on deviceSchedule.dID = device.dID;
+
 -- SELECT user.userID, email, name, position, location, DOB, linkref, phoneNumber FROM (account join user on account.userID = user.userID) left join faceImage on user.userID = faceImage.userID;
 
 
--- select * from device;
 
--- select * from deviceSchedule;
 -- SELECT * FROM `faceImage`;
 -- SELECT `user`.`userID` FROM `user`, `faceImage` WHERE `user`.`userID` = `faceImage`.`userID`;
+-- name, position, access_history.datetime

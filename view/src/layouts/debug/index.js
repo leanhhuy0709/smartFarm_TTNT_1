@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import mqtt from 'mqtt';//
 import {Buffer} from 'buffer';
+
+import {getMessage} from 'model/api/api';
 function App() {
   const [client, setClient] = useState(null);
 
@@ -37,6 +39,9 @@ function App() {
   return (
     <div>
       <button onClick={sendMessage}>Send Message</button>
+      <form>
+
+      </form>
     </div>
   );
 }
