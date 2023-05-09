@@ -26,8 +26,18 @@ def disconnected(client):
 
 def message(client , feed_id , payload):
     now = datetime.now()
-    current_time = now.strftime("%H:%M:%S %D")
+    current_time = now.strftime("%Y-%m-%d %H:%M:%S")
     print("Nhan du lieu tu " + feed_id + ": " + payload + " at " + current_time)
+    payload = int(payload)
+    if feed_id == "humidity": 
+        if payload > 90 or payload < 10:
+            addMessageModel(feed_id, current_time, payload)
+    elif feed_id == "temperature": 
+        if payload > 30 or payload < 10:
+            addMessageModel(feed_id, current_time, payload)
+    elif feed_id == "luminance": 
+        if payload > 200 or payload < 100:
+            addMessageModel(feed_id, current_time, payload)
     
 
 client = MQTTClient(AIO_USERNAME , AIO_KEY)
@@ -78,6 +88,10 @@ def addData():
             #print("Added 0 to " + feedsName)
 
 print("Adafruit python server is running!")
+
+client.subscribe('temperature')
+client.subscribe('humidity')
+client.subscribe('luminance')
 
 while True:
     scheduleData = loadSchedule()

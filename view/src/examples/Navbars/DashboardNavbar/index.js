@@ -44,6 +44,8 @@ import {
 import team2 from "assets/images/team-2.jpg";
 import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
 
+import { getMessage } from "model/api/api";
+
 function DashboardNavbar({ absolute, light, isMini }) {
   const [navbarType, setNavbarType] = useState();
   const [controller, dispatch] = useArgonController();
@@ -77,6 +79,17 @@ function DashboardNavbar({ absolute, light, isMini }) {
     return () => window.removeEventListener("scroll", handleTransparentNavbar);
   }, [dispatch, fixedNavbar]);
 
+
+  const [messages, setMessages] = useState([]);
+  useEffect(() => {
+    getMessage()
+    .then((res)=>{
+      console.log(res);
+      setMessages(res.slice(0, 5));
+    })
+    .catch((err)=>console.log(err));
+  }, []);
+
   const handleMiniSidenav = () => setMiniSidenav(dispatch, !miniSidenav);
   const handleConfiguratorOpen = () => setOpenConfigurator(dispatch, !openConfigurator);
   const handleOpenMenu = (event) => setOpenMenu(event.currentTarget);
@@ -95,18 +108,17 @@ function DashboardNavbar({ absolute, light, isMini }) {
       onClose={handleCloseMenu}
       sx={{ mt: 2 }}
     >
-      <NotificationItem
-        image={<img src='https://thumbs.dreamstime.com/b/thermometer-sun-hot-weather-vector-illustration-transparency-mesh-grid-224918588.jpg'/>}
-        title={["Alert:", "Temperature is too high"]}
-        date="13 hours ago"
-        onClick={handleCloseMenu}
-      />
-      <NotificationItem
-        image={<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWGbreE8wgglVhpUgovnE_XcNy4vZwZpb8tQ&usqp=CAU'  />}
-        title={["Alert", "Temperature is too low"]}
-        date="1 day"
-        onClick={handleCloseMenu}
-      />
+      {messages.map((e, idx) => {
+        return (
+          <NotificationItem
+            key = {idx}
+            image={<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Warning_icon.svg/2306px-Warning_icon.svg.png'  />}
+            title={["Alert: ", e.type + " is out of range (" + (e.value) +")"]}
+            date={e.datetime}
+            onClick={handleCloseMenu}
+          />
+        );
+      })}
     </Menu>
   );
 

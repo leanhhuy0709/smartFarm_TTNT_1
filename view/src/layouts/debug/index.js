@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import mqtt from 'mqtt';//
 import {Buffer} from 'buffer';
+
+import {getMessage} from 'model/api/api';
 function App() {
   const [client, setClient] = useState(null);
 
   useEffect(() => {
+    getMessage()
+    .then((res)=>{
+      console.log(res);
+    })
+    .catch((err)=>console.log(err));
     // Kết nối MQTT client đến Adafruit IO
     const options = {
       protocol: 'mqtts',

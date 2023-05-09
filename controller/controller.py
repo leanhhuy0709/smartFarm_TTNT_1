@@ -45,7 +45,7 @@ def loginController():
 
     # Gán token vào biến temp
     temp = token
-    isAdmin = (position == "Admin")
+    isAdmin = (position == "Owner")
     return jsonify({"token": temp, "isAdmin": isAdmin})
 
 @app.route('/user', methods=['GET'])
@@ -120,3 +120,7 @@ def getDeviceListController():
     token = request.headers.get('Authorization')
     userID = encodeToken(token)
     return json.dumps(getDeviceListModel())
+
+@app.route('/message', methods = ['GET'])
+def getMessageController():
+    return json.dumps(getMessageModel())

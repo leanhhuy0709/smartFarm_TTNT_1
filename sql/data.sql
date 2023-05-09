@@ -91,17 +91,10 @@ CREATE TABLE `deviceSchedule` (
     FOREIGN KEY (`dID`) REFERENCES `device`(`dID`)
 );
 
-CREATE TABLE `data` (
-	`dataID` int PRIMARY KEY AUTO_INCREMENT,
-    `value` int,
-    `time` datetime,
-    `type` varchar(255)
-);-- do something
-
 -- select * from `deviceSchedule`;
 
 -- insert data
-INSERT INTO `user` VALUES (1, "0123456789", "huy.leanh0709@hcmut.edu.vn", "Le Anh Huy", "owner", "Viet Nam", "2002-09-07");
+INSERT INTO `user` VALUES (1, "0123456789", "huy.leanh0709@hcmut.edu.vn", "Le Anh Huy", "Owner", "Viet Nam", "2002-09-07");
 INSERT INTO `account` VALUES ("huyleanh", "012345", 1);
 INSERT INTO `faceImage` VALUES (1000, "images/anhhuy.jpg", 1);
 INSERT INTO owner VALUES(1);
@@ -111,7 +104,8 @@ INSERT INTO `account` VALUES ("hoangdohuy", "012345", 2);
 INSERT INTO `employee` VALUES(2);
 
 
-
+INSERT INTO `message` VALUES(7000, "Humidity", "2023-05-09 13:00:59", 123);
+INSERT INTO `message`(type, datetime, value) VALUES("Temperature", "2023-05-09 13:00:59", -23);
 
 
 INSERT INTO `yolobit` VALUES (2000);
@@ -124,7 +118,7 @@ INSERT INTO `device`(`name`) VALUES ("Light");
 
 INSERT INTO `deviceSchedule`(`startTime`,`endTime`,`dOfW`,`dID`) VALUES ("15:00:00", "16:00:00", "Monday", 1);
 
-
+-- select * from message;
 
 -- view data
 -- SELECT * from `user` join `account` on `user`.`userID` = `account`.`userID`;

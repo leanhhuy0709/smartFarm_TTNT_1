@@ -144,5 +144,23 @@ def getDeviceListModel():
         result = cursor.fetchall()
         cnx.commit()
         return list(map(lambda x: {"dID": x[0], "name": x[1]}, result))
-    except KeyError:
-        print(KeyError)
+    except KeyError as e:
+        print(e)
+
+def getMessageModel():
+    try:
+        query = "SELECT * FROM message ORDER BY datetime DESC;"
+        cursor.execute(query)
+        result = cursor.fetchall()
+        cnx.commit()
+        return list(map(lambda x: {"type": x[1], "datetime": str(x[2]), "value": x[3]}, result))
+    except KeyError as e:
+        print(e)
+        
+def addMessageModel(typ, dt, val):
+    try:
+        query = "INSERT INTO `message`(type, datetime, value) VALUES(%s, %s, %s);"
+        cursor.execute(query, (typ, str(dt), val))
+        cnx.commit()
+    except KeyError as e:
+        print(e)
