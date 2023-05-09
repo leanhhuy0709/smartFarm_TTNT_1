@@ -138,14 +138,11 @@ INSERT INTO `deviceSchedule`(`startTime`,`endTime`,`dOfW`,`dID`) VALUES ("15:00:
 
 -- select * from user;
 -- -- SELECT * FROM deviceSchedule join device on deviceSchedule.dID = device.dID;
->>>>>>> 742ab52d124dde3431258fe1fb8bdd8be032c816
+
 -- SELECT user.userID, email, name, position, location, DOB, linkref, phoneNumber FROM (account join user on account.userID = user.userID) left join faceImage on user.userID = faceImage.userID;
 
 
--- select * from device;
 
--- select * from deviceSchedule;
-=======
 -- SELECT * FROM `faceImage`;
 -- SELECT `user`.`userID` FROM `user`, `faceImage` WHERE `user`.`userID` = `faceImage`.`userID`;
->>>>>>> 742ab52d124dde3431258fe1fb8bdd8be032c816
+
