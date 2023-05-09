@@ -6,14 +6,15 @@ from sklearn.tree import DecisionTreeClassifier
 import math
 
 
-def entropy(lables):
-    n = len(lables)
+def entropy(labels):
+    n = len(labels)
     counts = {}
-    for lable in lables:
-        if lable in counts:
-            counts[lable] +=1
+    for label in labels:
+        # print(label)
+        if label in counts:
+            counts[label] +=1
         else:
-            counts[lable] = 1
+            counts[label] = 1
     
     entropy = 0
     for count in counts.values():
@@ -22,7 +23,7 @@ def entropy(lables):
     return entropy
 
 def split_dataset(X, y, feature_index, threshold):
-    left_X, left_y, right_X, right_y = []
+    left_X , left_y ,  right_X , right_y = [], [], [], []
     for i in range(len(X)):
         if X[i][feature_index] < threshold:
             left_X.append(X[i])
@@ -74,6 +75,58 @@ def predict(tree, sample):
         # Traverse the right subtree if the sample's feature value is greater than or equal to the threshold
         return predict(tree['right_subtree'], sample)
 
-sample = [5.1, 3.5, 1.4, 0.2]  # Sample with 4 features
+sample = [28, 73, 150]  # Sample with 4 features
+
+X = [
+    [28, 75, 100],
+    [28, 60, 10000],
+    [29, 40, 4000],
+    [32, 20, 200],
+    [33, 60, 5000],
+
+    [28, 85, 2000],
+    [28, 90, 1600],
+    [30, 95, 3000],
+    [32, 98, 5000],
+    [31, 87, 2000],
+
+    [28, 90, 1200],
+    [28, 92, 800],
+    [29, 88, 600],
+    [30, 86, 1400],
+    [31, 98, 1000],
+    
+    [25, 95, 3000],
+    [25, 25, 200],
+    [25, 45, 1000],
+    [25, 65, 1500],
+    [25, 75, 6000],
+]
+y = [
+    1,
+    1,
+    1,
+    1,
+    1,
+
+    1,
+    1,
+    1,
+    1,
+    1,
+    
+    0,
+    0,
+    0,
+    0,
+    0,
+    
+    0,
+    0,
+    0,
+    0,
+    0
+]
+tree = build_tree(X, y)
 predicted_class = predict(tree, sample)
 print('Predicted class:', predicted_class)
