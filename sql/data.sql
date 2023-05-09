@@ -17,7 +17,7 @@ CREATE TABLE `user` (
 -- DROP TABLE `faceImage`;
 CREATE TABLE `faceImage` (
 	`code` int PRIMARY KEY AUTO_INCREMENT,
-    `label` varchar(255),
+--     `label` varchar(255),
     `linkref` varchar(1000),
     `userID` int,
 	FOREIGN KEY (`userID`) REFERENCES `user`(`userID`)
@@ -35,20 +35,29 @@ CREATE TABLE `employee`(
 	FOREIGN KEY (`employeeID`) REFERENCES `user`(`userID`)
 );
 
-CREATE TABLE `admin`(
-	`adminID` int PRIMARY KEY AUTO_INCREMENT,
-	FOREIGN KEY (`adminID`) REFERENCES `user`(`userID`)
+CREATE TABLE `owner`(
+	`ownerID` int PRIMARY KEY AUTO_INCREMENT,
+	FOREIGN KEY (`ownerID`) REFERENCES `user`(`userID`)
 );
-
+CREATE TABLE `access_history`(
+	`datetime` DATETIME PRIMARY KEY
+);
+CREATE TABLE `enter_farm`(
+	`userid` INT,
+    `datetime` DATETIME PRIMARY KEY,
+    
+    FOREIGN KEY (`datetime`) REFERENCES `access_history`(`datetime`),
+    FOREIGN KEY (`userid`) REFERENCES `user`(`userid`)
+);
 -- DROP TABLE `yolobit`;
 CREATE TABLE `yolobit`(
     `yolobitID` int PRIMARY KEY AUTO_INCREMENT
 );
--- DROP TABLE `adminManageYolobit`;
-CREATE TABLE `adminManageYolobit`(
-	`adminID` int PRIMARY KEY,
+-- DROP TABLE `ownerManageYolobit`;
+CREATE TABLE `ownerManageYolobit`(
+	`ownerID` int PRIMARY KEY,
     `yolobitID` int,
-    FOREIGN KEY (`adminID`) REFERENCES `admin`(`adminID`),
+    FOREIGN KEY (`ownerID`) REFERENCES `owner`(`ownerID`),
     FOREIGN KEY (`yolobitID`) REFERENCES `yolobit`(`yolobitID`)
 );
 -- DROP TABLE `sensor`;
@@ -60,6 +69,12 @@ CREATE TABLE `sensor`(
     `value` double,
     `yolobitID` int,
 	FOREIGN KEY (`yolobitID`) REFERENCES `yolobit`(`yolobitID`)
+);
+CREATE TABLE `message`(
+	`id` int PRIMARY KEY AUTO_INCREMENT,
+    `type` varchar(100),
+    `datetime` DATETIME,
+    `value` INT
 );
 -- DROP TABLE `device`;
 CREATE TABLE `device` (
@@ -86,10 +101,10 @@ CREATE TABLE `data` (
 -- select * from `deviceSchedule`;
 
 -- insert data
-INSERT INTO `user` VALUES (1, "0123456789", "huy.leanh0709@hcmut.edu.vn", "Le Anh Huy", "Admin", "Viet Nam", "2002-09-07");
+INSERT INTO `user` VALUES (1, "0123456789", "huy.leanh0709@hcmut.edu.vn", "Le Anh Huy", "owner", "Viet Nam", "2002-09-07");
 INSERT INTO `account` VALUES ("huyleanh", "012345", 1);
-INSERT INTO `faceImage` VALUES (1000, "Huy Image 1", "https://scontent.fsgn10-2.fna.fbcdn.net/v/t39.30808-6/336268601_742518720862683_8492416973459754325_n.jpg?stp=cp6_dst-jpg&_nc_cat=104&ccb=1-7&_nc_sid=dbeb18&_nc_ohc=dprinoks7LkAX_Hr33K&_nc_ht=scontent.fsgn10-2.fna&oh=00_AfCgRfgdpAojSYNL8tg98ctdJcHmtwNM1QZJqNMt8eGI8Q&oe=641C7433", 1);
-INSERT INTO admin VALUES(1);
+INSERT INTO `faceImage` VALUES (1000, "images/anhhuy.jpg", 1);
+INSERT INTO owner VALUES(1);
 
 INSERT INTO `user` VALUES (2, "0123456789", "hoang.dohuy@hcmut.edu.vn", "Do Huy Hoang", "Staff", "Viet Nam", "2002-09-09");
 INSERT INTO `account` VALUES ("hoangdohuy", "012345", 2);
@@ -100,7 +115,7 @@ INSERT INTO `employee` VALUES(2);
 
 
 INSERT INTO `yolobit` VALUES (2000);
-INSERT INTO `adminManageYolobit` VALUES(1, 2000);
+INSERT INTO `ownerManageYolobit` VALUES(1, 2000);
 
 INSERT INTO `sensor` VALUES (3000, "2023-03-17 15:16:59", "Viet Nam", "Humidity", 40, 2000);
 INSERT INTO `device`(`name`) VALUES ("Water pump");
@@ -118,14 +133,19 @@ INSERT INTO `deviceSchedule`(`startTime`,`endTime`,`dOfW`,`dID`) VALUES ("15:00:
 -- select * from faceImage;
 -- select * from sensor;
 -- SELECT * FROM (account join user on account.userID = user.userID) left join faceImage on user.userID = faceImage.userID;
--- SELECT account.userID, position FROM account join user on account.userID = user.userID where username='huyleanh' and password='012345';
+
+-- -- SELECT account.userID, position FROM account join user on account.userID = user.userID where username='huyleanh' and password='012345';
 
 -- select * from user;
--- SELECT * FROM deviceSchedule join device on deviceSchedule.dID = device.dID;
+-- -- SELECT * FROM deviceSchedule join device on deviceSchedule.dID = device.dID;
+>>>>>>> 742ab52d124dde3431258fe1fb8bdd8be032c816
 -- SELECT user.userID, email, name, position, location, DOB, linkref, phoneNumber FROM (account join user on account.userID = user.userID) left join faceImage on user.userID = faceImage.userID;
 
 
 -- select * from device;
 
 -- select * from deviceSchedule;
-select * from `faceImage`
+=======
+-- SELECT * FROM `faceImage`;
+-- SELECT `user`.`userID` FROM `user`, `faceImage` WHERE `user`.`userID` = `faceImage`.`userID`;
+>>>>>>> 742ab52d124dde3431258fe1fb8bdd8be032c816
