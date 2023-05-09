@@ -102,11 +102,6 @@ function Schedule() {
         .then((res)=>setButtonL(res))
         .catch((err)=>console.log(err));
 
-        const t = document.getElementById("tarpaulin_cb");
-        const w = document.getElementById("water_cb");
-        t.checked = false;
-        w.checked = false;
-
     /*
         let res = [{"dID": 4000, "dSID": 5000, "dOW": "Monday", "startTime": "15:00", "endTime": "16:00", "name": "Water Pump"},
         {"dID": 4001, "dSID": 5001, "dOW": "Tuesday", "startTime": "13:00", "endTime": "14:00", "name": "Water Pump"},
@@ -274,14 +269,14 @@ function Schedule() {
                         <ArgonTypography style={{fontSize: "16px", padding: "10px"}}><b>Auto water the tree</b></ArgonTypography>
                     </Grid>
                     <Grid item xs={2} style={{background: "inherit"}}>
-                    <Checkbox id = "water_cb" defaultChecked />
+                    <Checkbox id = "water_cb" defaultChecked checked = {false} />
                     </Grid>
 
                     <Grid item xs={10} style={{background: "inherit"}}>
                         <ArgonTypography style={{fontSize: "16px", padding: "10px"}}><b>Auto open tarpaulin</b></ArgonTypography>
                     </Grid>
                     <Grid item xs={2} style={{background: "inherit"}}>
-                    <Checkbox id = "tarpaulin_cb" defaultChecked />
+                    <Checkbox id = "tarpaulin_cb" defaultChecked checked = {false} />
                     </Grid>
 
                     <Grid item xs={12} style={{background: "inherit", textAlign: "center", marginBottom: "20px"}}>
