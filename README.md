@@ -1,2 +1,2 @@
-# smartFarm_TTNT_1
+# Smart Farm 1.0
 ![alt text](figures/dashboard.png)
