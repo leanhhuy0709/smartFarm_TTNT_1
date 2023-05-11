@@ -41,11 +41,12 @@ while True:
         now  = datetime.now()
         current_time = now.strftime("%Y-%m-%d %H:%M:%S")
         face_result = max(set(rec_names), key = rec_names.count)
+        # print(face_result)
         if face_result == "UNKNOWN":
             try:
-                query = "INSERT INTO `access_history` VALUES (%s)"
-                cursor.execute(query, (now))
-                cursor.commit()
+                query = "INSERT INTO `access_history` VALUES ('" + str(current_time) + "')"
+                cursor.execute(query)
+                cnx.commit()
             except KeyError as e:
                 print(e)
             
@@ -101,7 +102,7 @@ while True:
             # See if the face is a match for the known face(s)
             face_frames += 1
             matches = face_recognition.compare_faces(known_face_encodings, face_encoding, tolerance=0.4)
-            name = "Unknown"
+            name = "Unknown".upper()
             
             # print(matches)
 

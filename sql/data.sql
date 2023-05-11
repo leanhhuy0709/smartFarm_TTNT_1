@@ -125,7 +125,7 @@ INSERT INTO `device`(`name`) VALUES ("Water pump");
 INSERT INTO `device`(`name`) VALUES ("Tarpaulin");
 INSERT INTO `device`(`name`) VALUES ("Light");
 
-INSERT INTO `deviceSchedule`(`startTime`,`endTime`,`dOfW`,`dID`) VALUES ("15:00:00", "16:00:00", "Monday", 1);
+-- INSERT INTO `deviceSchedule`(`startTime`,`endTime`,`dOfW`,`dID`) VALUES ("15:00:00", "16:00:00", "Monday", 1);
 
 -- select * from message;
 

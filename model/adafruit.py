@@ -44,12 +44,12 @@ def message(client , feed_id , payload):
     now = datetime.now()
     current_time = now.strftime("%Y-%m-%d %H:%M:%S")
     print("Nhan du lieu tu " + feed_id + ": " + payload + " at " + current_time)
-    payload = int(payload)
+    payload = float(payload)
     if feed_id == "smart-farm-ttnt.humidity": 
         if payload > 90 or payload < 10:
             addMessageModel(feed_id, current_time, payload)
     elif feed_id == "smart-farm-ttnt.temperature": 
-        if payload > 30 or payload < 10:
+        if payload > 40 or payload < 15:
             addMessageModel(feed_id, current_time, payload)
     elif feed_id == "smart-farm-ttnt.luminance": 
         if payload > 200 or payload < 100:

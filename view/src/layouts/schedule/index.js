@@ -220,7 +220,7 @@ function Schedule() {
                 <Card>
                 <Grid container spacing={3} style={{background: "inherit"}}>
                     <Grid item xs={12} style={{background: "inherit"}}>
-                    <ArgonTypography variant="h2" style={{textAlign: "center"}}>Function</ArgonTypography>
+                    <ArgonTypography variant="h2" style={{textAlign: "center"}}>Schedule</ArgonTypography>
                     </Grid>
 
                     <Grid item xs={2} style={{background: "inherit"}}>

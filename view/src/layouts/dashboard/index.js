@@ -163,7 +163,7 @@ function Default() {
                 title="Recent temperature"
                 count={mqttT ? `${mqttT} \u2103` : (tData.datasets[0].data.length > 0 ?`${round2Dec(tData.datasets[0].data[tData.datasets[0].data.length - 1])} \u2103`: '')}
                 icon={{ color: "info", component: <i className='fa fa-thermometer'/> }}
-                percentage={{ color: `${tData.datasets[0].data[tData.datasets[0].data.length - 1] - tData.datasets[0].data[tData.datasets[0].data.length - 2] >= 0 ? "success":"error"}`, count:`${tData.datasets[0].data[tData.datasets[0].data.length - 1] - tData.datasets[0].data[tData.datasets[0].data.length - 2] > 0 ? '+':''}${round2Dec(tData.datasets[0].data[tData.datasets[0].data.length - 1] - tData.datasets[0].data[tData.datasets[0].data.length - 2])} \u2103`, text: "since one hour" }}
+                percentage={{ color: `${tData.datasets[0].data[tData.datasets[0].data.length - 1] - tData.datasets[0].data[tData.datasets[0].data.length - 2] >= 0 ? "success":"error"}`, count:`${tData.datasets[0].data[tData.datasets[0].data.length - 1] - tData.datasets[0].data[tData.datasets[0].data.length - 2] > 0 ? '+':''}${round2Dec(tData.datasets[0].data[tData.datasets[0].data.length - 1] - tData.datasets[0].data[tData.datasets[0].data.length - 2])} \u2103`, text: "since last hour" }}
                 />
             </Grid>
             <Grid item xs={12} md={6} lg={3}>
@@ -171,7 +171,7 @@ function Default() {
                 title="Recent humidity"
                 count={mqttH ? `${mqttH} %` : (hData.datasets[0].data.length > 0 ?`${round2Dec(hData.datasets[0].data[hData.datasets[0].data.length - 1])} %`: '')}
                 icon={{ color: "error", component: <i className="fa fa-tint" /> }}
-                percentage={{ color: `${hData.datasets[0].data[hData.datasets[0].data.length - 1] - hData.datasets[0].data[hData.datasets[0].data.length - 2] >= 0 ? "success":"error"}`, count:`${hData.datasets[0].data[hData.datasets[0].data.length - 1] - hData.datasets[0].data[hData.datasets[0].data.length - 2] > 0 ? '+':''}${round2Dec(hData.datasets[0].data[hData.datasets[0].data.length - 1] - hData.datasets[0].data[hData.datasets[0].data.length - 2])} %`, text: "since one hour" }}
+                percentage={{ color: `${hData.datasets[0].data[hData.datasets[0].data.length - 1] - hData.datasets[0].data[hData.datasets[0].data.length - 2] >= 0 ? "success":"error"}`, count:`${hData.datasets[0].data[hData.datasets[0].data.length - 1] - hData.datasets[0].data[hData.datasets[0].data.length - 2] > 0 ? '+':''}${round2Dec(hData.datasets[0].data[hData.datasets[0].data.length - 1] - hData.datasets[0].data[hData.datasets[0].data.length - 2])} %`, text: "since last hour" }}
                 />
             </Grid>
             
@@ -180,7 +180,7 @@ function Default() {
                 title="Recent luminance"
                 count={mqttL ? `${mqttL} lux` : (lData.datasets[0].data.length > 0 ?`${round2Dec(lData.datasets[0].data[lData.datasets[0].data.length - 1])} lux`: '')}
                 icon={{ color: "success", component: <i className="fa fa-lightbulb-o" /> }}
-                percentage={{ color: `${lData.datasets[0].data[lData.datasets[0].data.length - 1] - lData.datasets[0].data[lData.datasets[0].data.length - 2] >= 0 ? "success":"error"}`, count:`${lData.datasets[0].data[lData.datasets[0].data.length - 1] - lData.datasets[0].data[lData.datasets[0].data.length - 2] > 0 ? '+':''}${round2Dec(lData.datasets[0].data[lData.datasets[0].data.length - 1] - lData.datasets[0].data[lData.datasets[0].data.length - 2])} lux`, text: "since one hour" }}
+                percentage={{ color: `${lData.datasets[0].data[lData.datasets[0].data.length - 1] - lData.datasets[0].data[lData.datasets[0].data.length - 2] >= 0 ? "success":"error"}`, count:`${lData.datasets[0].data[lData.datasets[0].data.length - 1] - lData.datasets[0].data[lData.datasets[0].data.length - 2] > 0 ? '+':''}${round2Dec(lData.datasets[0].data[lData.datasets[0].data.length - 1] - lData.datasets[0].data[lData.datasets[0].data.length - 2])} lux`, text: "since last hour" }}
                 />
             </Grid>
             
